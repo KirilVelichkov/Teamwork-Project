@@ -1,0 +1,64 @@
+aside, main {
+    float: left;
+    margin: 10px;
+}
+h1, h2, h3, h4 {
+    color: #446E9B;
+    margin: 5px;
+}
+a {
+    color: #446E9B;
+    cursor: pointer;
+}
+
+#navbar-brand-id {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 5px;
+    padding: 10px;
+    height: 38px;
+    border-radius: 10px; 
+    display: inline-block;
+    text-align: middle; 
+}
+#login-control, #search-control {
+    margin: 5px;
+}
+.hidden {
+    display: none;
+}
+.form-login {
+    width: 250px;
+    margin: 5px;
+}
+.form-register {
+    width: 250px;
+    margin: 5px;
+}
+h4 {
+    font-weight: bold;
+}
+h4 span {
+    font-weight: normal;
+}
+
+.small {
+    width: 150px;
+    height: 200px;
+}
+
+.large {
+    width: 250px;
+    height: 400px;
+}
+
+.book-container {
+    float: left;
+    margin: 10px;
+}
+
+.book-container a {
+    color: black;
+    font-weight: normal;
+}
+
