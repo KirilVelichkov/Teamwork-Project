@@ -37,6 +37,8 @@ a {
 }
 h4 {
     font-weight: bold;
+    width:150px;
+    height: 80px;
 }
 h4 span {
     font-weight: normal;
@@ -53,8 +55,9 @@ h4 span {
 }
 
 .book-container {
-    float: left;
+    display: inline-block;
     margin: 10px;
+    position: relative;
 }
 
 .book-container a {

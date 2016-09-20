@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>index</title>
     <link rel="stylesheet" href="styles/silver-theme.css">
     <link rel="stylesheet" href="styles/custom-theme.css">
+    <link rel="stylesheet" href="styles/style.css">
 </head>
+
 <body>
-    <header>
+    <header style="position:fixed;width:100%;z-index:100">
         <nav class="navbar navbar-default">
-            <a href="#/" class="navbar-brand" id="navbar-brand-id">BOOKSTORE.COM</a>  
-            
+            <a href="#/" class="navbar-brand" id="navbar-brand-id">BOOKSTORE.COM</a>
+
             <form class="navbar-form navbar-right" role="search" id="search-control">
                 <input type="text" class="form-control" placeholder="Search title">
                 <button type="submit" class="btn btn-info" id="search-btn">Search</button>
@@ -25,21 +28,25 @@
         </nav>
     </header>
 
-    <aside>
-        <ul class="nav nav-pills nav-stacked">
-            <li class="active"><a href="#">Genres</a></li>
-            <li><a href="#/genre-info" class="genre-info">Science and Technology</a></li>
-            <li><a href="#/genre-info" class="genre-info">Economy</a></li>
-            <li><a href="#/genre-info" class="genre-info">Fantasy</a></li>
-            <li><a href="#/">All</a></li>
-        </ul>
-    </aside>
+    <div id="container" style="position:relative;top:50px;">
+        <div class="row">
+            <aside class="col-xs-2">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active"><a href="#">Genres</a></li>
+                    <li><a href="#/genre-info" class="genre-info">Science and Technology</a></li>
+                    <li><a href="#/genre-info" class="genre-info">Economy</a></li>
+                    <li><a href="#/genre-info" class="genre-info">Fantasy</a></li>
+                    <li><a href="#/">All</a></li>
+                </ul>
+            </aside>
 
-    <main id="content">
-    </main>
-
+            <main id="content" class="col-xs-9">
+            </main>
+        </div>
+    </div>
     <script src="./node_modules/systemjs/dist/system.js"></script>
     <script src="./config.js"></script>
 
 </body>
+
 </html>

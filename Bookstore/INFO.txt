@@ -15,3 +15,6 @@ TO DOs...
 // fix password field 
 // add more info to register form
 // implement toastr
+// only logged users to rate + rate only once
+// unit tests
+// add book to favorites

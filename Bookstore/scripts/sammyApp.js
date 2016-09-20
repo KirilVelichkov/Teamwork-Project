@@ -135,6 +135,7 @@ $('#nav-btn-logout').on('click', function(){
 });
 
 $('.genre-info').on('click', function(){
+    //$(this).parent().toggleClass("active");
     var genreName = $(this).html();
     localStorage.setItem('CURRENT-GENRE', genreName);
     document.location.reload(true);
