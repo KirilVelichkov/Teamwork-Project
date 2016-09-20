@@ -1,3 +1,17 @@
 for libraries run
 npm install
 bower install
+
+
+TO DOs...
+// add shopping cart
+// fix ratings
+// add book price
+// show books by author
+// detailed search
+// basic search
+// books positioning
+// user page (account settings)
+// fix password field 
+// add more info to register form
+// implement toastr
