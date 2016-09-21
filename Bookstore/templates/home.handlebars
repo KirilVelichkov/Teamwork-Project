@@ -1,10 +1,12 @@
 <h1 id="home-header">Search through our library</h1>
 {{#each this}}
-<div class="book-container">
+<div class="book-container book-presentation-container">
     <img src="{{picture._downloadURL}}" class="small" alt="empty">
-    <h4>Title: <a href="#/book-info" class="book-title">{{title}}</a></h4>
-    <h4>Author: <a href="#/author-info" class="book-author">{{author}}</a></h4>
-    <!--<h4>Genre: <span>{{genre}}</span></h4>
-    <h4>Rating: <span>{{rating}}</span></h4>-->
+    <div class="book-characteristics">
+        <h4 class="book-presentation-title">Title: <a href="#/book-info" class="book-title">{{title}}</a></h4>
+        <h4 class="book-presentation-author">Author: <a href="#/author-info" class="book-author">{{author}}</a></h4>
+        <h4 class="book-presentation-price">Price: <span class="book-price">{{price}} $</span></h4>
+        <!--<h4>Rating: <span>{{rating}}</span></h4>-->
+    </div>
 </div>
 {{/each}}
