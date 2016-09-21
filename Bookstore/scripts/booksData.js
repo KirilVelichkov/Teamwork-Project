@@ -111,5 +111,63 @@ function rateBookNegative(book) {
     });
 }
 
-let booksData = { getAllBooks, getBooksByGenre, getBookByTitle, rateBookNegative, rateBookPositive };
+// function addBookToCart(book) {
+    
+//     var promise = new Promise(function (resolve, reject) {
+//         var autorizationHeader = UTILS.encryptToBase64(CONSTANTS.AUTORIZATION_STRING_MASTER);
+//         var userId = localStorage.getItem(CONSTANTS.USER_ID);
+
+//         getUserBooks().then(function (books) {
+//             var data = {
+//                 booksInCart: books
+//             };
+//             data.booksInCart.push(book);
+//             $.ajax({
+//                 url: `https://baas.kinvey.com/user/${CONSTANTS.APP_ID}/${userId}`,
+//                 method: 'PUT',
+//                 headers: {
+//                     'Authorization': `Basic ${autorizationHeader}`
+//                 },
+//                 data: JSON.stringify(data),
+//                 contentType: 'application/json',
+//                 success: function (response) {
+//                     resolve(response);
+//                 }
+//             });
+//         });
+//     });
+
+//     return promise;
+// }
+
+// function getUserBooks() {
+//     var promise = new Promise(function (resolve, reject) {
+//         var autorizationHeader = UTILS.encryptToBase64(CONSTANTS.AUTORIZATION_STRING_MASTER);
+//         var userId = localStorage.getItem(CONSTANTS.USER_ID);
+
+//         $.ajax({
+//             url: `https://baas.kinvey.com/user/${CONSTANTS.APP_ID}/${userId}`,
+//             method: 'GET',
+//             headers: {
+//                 'Authorization': `Basic ${autorizationHeader}`
+//             },
+//             contentType: 'application/json',
+//             success: function (response) {
+//                 localStorage.setItem(CONSTANTS.BOOKS_IN_CART, response.booksInCart);
+//                 resolve(response.booksInCart);
+//             }
+//         });
+//     });
+
+//     return promise;
+// }
+
+let booksData = {
+    getAllBooks,
+    getBooksByGenre,
+    getBookByTitle,
+    rateBookNegative,
+    rateBookPositive
+};
+
 export {booksData as booksData};

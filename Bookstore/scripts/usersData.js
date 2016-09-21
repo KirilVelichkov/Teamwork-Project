@@ -21,9 +21,9 @@ var login = function(logUser){
             data: JSON.stringify(requestedUser),
             contentType: 'application/json',
             success: function(response){
-                console.log(response);
                 localStorage.setItem(CONSTANTS.AUTH_TOKEN, response._kmd.authtoken);
                 localStorage.setItem(CONSTANTS.USER_NAME, response.username);
+                localStorage.setItem(CONSTANTS.USER_ID, response._id);
                 
                 resolve(response);
             }
@@ -63,6 +63,7 @@ var logout = function(){
     var promise = new Promise(function (resolve, reject){
         localStorage.removeItem(CONSTANTS.AUTH_TOKEN);
         localStorage.removeItem(CONSTANTS.USER_NAME);
+        localStorage.removeItem(CONSTANTS.USER_ID);
         resolve();
     });
 
@@ -72,12 +73,15 @@ var logout = function(){
 var current = function(){
     var username = localStorage.getItem(CONSTANTS.USER_NAME);
     var token = localStorage.getItem(CONSTANTS.AUTH_TOKEN);
+    var user_id = localStorage.getItem(CONSTANTS.USER_ID);
+    
     if(!username){
         return null;
     } else {
         return {
             username: username,
-            token: token
+            token: token,
+            user_id: user_id
         };
     }   
 };

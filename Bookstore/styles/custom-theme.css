@@ -1,9 +1,19 @@
+body{
+    overflow-x: hidden;
+}
 header{
     width:100%;
     z-index:100;
 }
 .cart{
     color:white;
+}
+.cart:hover{
+    color:darkgrey;
+}
+#cd-cart {
+	position: fixed;
+	
 }
 .btn-circle{
     width: 35px;
@@ -26,7 +36,6 @@ aside, main {
     float: left;
     margin: 10px;
 }
-
 aside{
     top:50px;
 }
@@ -50,6 +59,11 @@ a {
 }
 #login-control, #search-control {
     margin: 5px;
+}
+#shopping-cart-menu{
+    top:50px;
+    border: 2px solid #E5E5E5;
+    border-radius: 5px;
 }
 .hidden {
     display: none;
