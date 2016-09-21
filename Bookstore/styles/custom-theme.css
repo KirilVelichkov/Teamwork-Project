@@ -2,6 +2,19 @@ header{
     width:100%;
     z-index:100;
 }
+.cart{
+    color:white;
+}
+.btn-circle{
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 15px;
+    line-height: 1.428571429;
+    border-radius: 100%;
+    background-color: #1489F0;
+}
 .position-fixed{
     position:fixed;
 }
@@ -13,9 +26,7 @@ aside, main {
     float: left;
     margin: 10px;
 }
-main{
-    left:200px;
-}
+
 aside{
     top:50px;
 }
@@ -61,6 +72,7 @@ h4 span {
     font-weight: normal;
 }
 .small {
+    margin-top:10px;
     width: 150px;
     height: 200px;
     margin-left:10px;

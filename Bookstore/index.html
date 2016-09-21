@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Bookstore</title>
     <link rel="shortcut icon" href="Images/faviconBook.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/silver-theme.css">
     <link rel="stylesheet" href="styles/custom-theme.css">
 </head>
@@ -18,6 +19,10 @@
                 <input type="text" class="form-control" placeholder="Search title">
                 <button type="submit" class="btn btn-info" id="search-btn">Search</button>
                 <a href="#/detailed-search" class="btn btn-info" id="detailed-btn">Detailed Search</a>
+                <a href="#/shopping-cart" class="btn btn-circle">
+                    <span class="glyphicon glyphicon-shopping-cart cart"></span>
+                </a>
+
             </form>
 
             <div class="navbar-right" id="login-control">
@@ -36,12 +41,11 @@
                     <li><a href="#/genre-info" class="genre-info">Science and Technology</a></li>
                     <li><a href="#/genre-info" class="genre-info">Economy</a></li>
                     <li><a href="#/genre-info" class="genre-info">Fantasy</a></li>
-                    <li><a href="#/genre-info" class="genre-info">Classics</a></li>                    
+                    <li><a href="#/genre-info" class="genre-info">Classics</a></li>
                     <li><a href="#/">All</a></li>
                 </ul>
             </aside>
-
-            <main id="content" class="col-xs-9">
+            <main id="content" class="col-xs-offset-2 col-xs-9">
             </main>
         </div>
     </div>
