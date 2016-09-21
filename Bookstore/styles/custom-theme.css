@@ -13,6 +13,12 @@ aside, main {
     float: left;
     margin: 10px;
 }
+main{
+    left:200px;
+}
+aside{
+    top:50px;
+}
 h1, h2, h3, h4 {
     color: #446E9B;
     margin: 5px;
@@ -66,7 +72,8 @@ h4 span {
 }
 .book-price{
     color:red;
-    font-family: Consolas;
+    font-family: Consolas,monaco,monospace;
+    font-weight: bold;
 }
 .book-container {
     font-family: "Franklin Gothic Medium","Franklin Gothic","ITC Franklin Gothic",Arial,sans-serif;

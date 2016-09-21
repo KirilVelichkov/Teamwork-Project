@@ -5,16 +5,17 @@ bower install
 
 TO DOs...
 // add shopping cart
-// fix ratings
-// add book price
+// fix ratings - done (ratings updates instantly now ;)  )
+// add book price - done
 // show books by author
 // detailed search
 // basic search
-// books positioning
+// books positioning - done
 // user page (account settings)
-// fix password field 
+// fix password field  - done
 // add more info to register form
 // implement toastr
 // only logged users to rate + rate only once
 // unit tests
 // add book to favorites
+// add pagination

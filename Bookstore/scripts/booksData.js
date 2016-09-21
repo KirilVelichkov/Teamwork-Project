@@ -4,7 +4,7 @@ import { UTILS } from 'utils';
 import { templates } from 'templates';
 
 function getAllBooks() {
-    return new Promise(function(resolve, reject){
+    return new Promise(function (resolve, reject) {
         var autorizationHeader = UTILS.encryptToBase64(CONSTANTS.AUTORIZATION_STRING_MASTER);
 
         $.ajax({
@@ -15,7 +15,7 @@ function getAllBooks() {
             },
             data: JSON.stringify(),
             contentType: 'application/json',
-            success: function(response){
+            success: function (response) {
                 resolve(response);
             }
         });
@@ -24,10 +24,10 @@ function getAllBooks() {
 }
 
 function getBooksByGenre(genreName) {
-    return new Promise(function(resolve, reject){
+    return new Promise(function (resolve, reject) {
         var autorizationHeader = UTILS.encryptToBase64(CONSTANTS.AUTORIZATION_STRING_MASTER);
         var filter = JSON.stringify({
-            "genre" : genreName
+            "genre": genreName
         });
         $.ajax({
             url: `https://baas.kinvey.com/appdata/${CONSTANTS.APP_ID}/books/?query=${filter}`,
@@ -37,18 +37,18 @@ function getBooksByGenre(genreName) {
             },
             data: JSON.stringify(),
             contentType: 'application/json',
-            success: function(response){
+            success: function (response) {
                 resolve(response);
             }
         });
     });
 }
 
-function getBookByTitle(titleName){
-    return new Promise(function(resolve, reject){
+function getBookByTitle(titleName) {
+    return new Promise(function (resolve, reject) {
         var autorizationHeader = UTILS.encryptToBase64(CONSTANTS.AUTORIZATION_STRING_MASTER);
         var filter = JSON.stringify({
-            "title" : titleName
+            "title": titleName
         });
         $.ajax({
             url: `https://baas.kinvey.com/appdata/${CONSTANTS.APP_ID}/books/?query=${filter}`,
@@ -58,18 +58,19 @@ function getBookByTitle(titleName){
             },
             data: JSON.stringify(),
             contentType: 'application/json',
-            success: function(response){
+            success: function (response) {
                 resolve(response);
             }
         });
     });
 }
 
-function rateBookPositive(book){
-    return new Promise(function(resolve, reject){
+function rateBookPositive(book) {
+    return new Promise(function (resolve, reject) {
         var autorizationHeader = UTILS.encryptToBase64(CONSTANTS.AUTORIZATION_STRING_MASTER);
         var id = book._id;
         book.rating += 1;
+        $('#rating').text(book.rating);
 
         $.ajax({
             url: `https://baas.kinvey.com/appdata/${CONSTANTS.APP_ID}/books/${id}`,
@@ -79,19 +80,20 @@ function rateBookPositive(book){
             },
             data: JSON.stringify(book),
             contentType: 'application/json',
-            success: function(response){
-                document.location.reload(true);
+            success: function (response) {
+                //document.location.reload(true);
                 resolve(response);
             }
         });
     });
 }
 
-function rateBookNegative(book){
-    return new Promise(function(resolve, reject){
+function rateBookNegative(book) {
+    return new Promise(function (resolve, reject) {
         var autorizationHeader = UTILS.encryptToBase64(CONSTANTS.AUTORIZATION_STRING_MASTER);
         var id = book._id;
         book.rating -= 1;
+        $('#rating').text(book.rating);
 
         $.ajax({
             url: `https://baas.kinvey.com/appdata/${CONSTANTS.APP_ID}/books/${id}`,
@@ -101,8 +103,8 @@ function rateBookNegative(book){
             },
             data: JSON.stringify(book),
             contentType: 'application/json',
-            success: function(response){
-                document.location.reload(true);
+            success: function (response) {
+                //document.location.reload(true);
                 resolve(response);
             }
         });
