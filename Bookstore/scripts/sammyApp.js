@@ -78,8 +78,8 @@ var router = Sammy('#content', function () {
             });
     });
 
-    this.get('#/genre-info', function (context) {
-        var genre = localStorage.getItem('CURRENT-GENRE');
+    this.get('#/genre-info/:genre', function (context) {
+        var genre = this.params['genre'];
         var category;
 
         booksData.getBooksByGenre(genre)
@@ -138,13 +138,6 @@ $('#nav-btn-logout').on('click', function () {
             location = '#/';
             document.location.reload(true);
         });
-});
-
-$('.genre-info').on('click', function () {
-    //$(this).parent().toggleClass("active");
-    var genreName = $(this).html();
-    localStorage.setItem('CURRENT-GENRE', genreName);
-    document.location.reload(true);
 });
 
 $('#shopping-cart-button').on('mouseenter', function () {
