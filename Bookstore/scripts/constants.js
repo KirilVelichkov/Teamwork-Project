@@ -7,6 +7,8 @@ const AUTORIZATION_STRING = `${APP_ID}:${APP_SECRET}`;
 const AUTORIZATION_STRING_MASTER = `${APP_ID}:${APP_MASTER}`;
 const USER_ID = 'user_id';
 const BOOKS_IN_CART = 'books_in_cart';
+const PAGE_SIZE_BIG = 10;
+const PAGE_SIZE_SMALL = 5;
 
 let constants = {
     AUTH_TOKEN,
@@ -17,6 +19,8 @@ let constants = {
     AUTORIZATION_STRING, 
     AUTORIZATION_STRING_MASTER, 
     USER_ID,
-    BOOKS_IN_CART
+    BOOKS_IN_CART,
+    PAGE_BIG,
+    PAGE_SMALL
 };
 export { constants as CONSTANTS };

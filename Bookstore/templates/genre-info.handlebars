@@ -6,7 +6,12 @@
         <h4 class="book-presentation-title">Title: <a href="#/book-info" class="book-title">{{title}}</a></h4>
         <h4 class="book-presentation-author">Author: <a href="#/author-info" class="book-author">{{author}}</a></h4>
         <h4 class="book-presentation-price">Price: <span class="book-price">{{price}} $</span></h4>
-        <!--<h4>Rating: <span>{{rating}}</span></h4>-->
     </div>
+</div>
+{{/each}}
+<div style="clear: both;"></div>
+{{#each this.indeces}}
+<div class="btn-group btn-page-div">
+    <a href="#/genre-info/{{../this.name}}&{{this}}" class="btn btn-primary btn-page">{{this}}</a>
 </div>
 {{/each}}

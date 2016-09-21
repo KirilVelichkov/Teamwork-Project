@@ -1,5 +1,7 @@
 import Sammy from 'sammy';
 import $ from 'jquery';
+import { CONSTANTS } from 'constants';
+import { UTILS } from 'utils';
 import { templates } from 'templates';
 import { booksData } from 'booksData';
 import { usersData } from 'usersData';
@@ -7,9 +9,11 @@ import { usersData } from 'usersData';
 var router = Sammy('#content', function () {
     var $content = $('#content');
 
-    this.get('#/', function () {
-        var books;
-
+    this.get('#/home/:pageNumber', function () {
+        var pageNumber = this.params['pageNumber'];
+        var totalBooks;
+        var booksOnPage;
+        var pageIndeces;
         // booksData.addBookToCart().then(function(result){
         //     console.log(result.booksInCart);
             
@@ -17,11 +21,17 @@ var router = Sammy('#content', function () {
 
         booksData.getAllBooks()
             .then(function (result) {
-                books = result;
+                booksOnPage = UTILS.createBooksOnPage(result, pageNumber, CONSTANTS.PAGE_SIZE_BIG);
+                pageIndeces = UTILS.createPageIndeces(result, CONSTANTS.PAGE_SIZE_BIG);
+                totalBooks = {
+                    books: booksOnPage,
+                    indeces: pageIndeces
+                };
+
                 return templates.get('home');
             })
             .then(function (template) {
-                $content.html(template(books));
+                $content.html(template(totalBooks));
 
                 $('.book-title').on('click', function () {
                     var currentTitle = $(this).html();
@@ -32,7 +42,7 @@ var router = Sammy('#content', function () {
 
     this.get('#/login', function (context) {
         if (usersData.current()) {
-            context.redirect('#/');
+            context.redirect('#/home/1');
             return;
         }
 
@@ -57,7 +67,7 @@ var router = Sammy('#content', function () {
 
     this.get('#/register', function (context) {
         if (usersData.current()) {
-            context.redirect('#/');
+            context.redirect('#/home/1');
             return;
         }
         templates.get('register')
@@ -78,17 +88,25 @@ var router = Sammy('#content', function () {
             });
     });
 
-    this.get('#/genre-info/:genre', function (context) {
+    this.get('#/genre-info/?:genre&:pageNumber', function (context) {
         var genre = this.params['genre'];
+        var pageNumber = this.params['pageNumber'];
         var category;
+        var booksOnPage;
+        var pageIndeces;
 
         booksData.getBooksByGenre(genre)
             .then(function (result) {
+                booksOnPage = UTILS.createBooksOnPage(result, pageNumber, CONSTANTS.PAGE_SIZE_SMALL);
+                pageIndeces = UTILS.createPageIndeces(result, CONSTANTS.PAGE_SIZE_SMALL);
+
                 category = {
                     name: genre,
-                    books: result
+                    books: booksOnPage,
+                    indeces: pageIndeces
                 };
-                return templates.get('genre');
+
+                return templates.get('genre-info');
             })
             .then(function (template) {
                 $content.html(template(category));
@@ -123,7 +141,6 @@ var router = Sammy('#content', function () {
 
 });
 
-
 if (usersData.current()) {
     $('#nav-btn-login, #nav-btn-register').toggle('hidden');
 
@@ -135,7 +152,7 @@ if (usersData.current()) {
 $('#nav-btn-logout').on('click', function () {
     usersData.logout()
         .then(function () {
-            location = '#/';
+            location = '#/home/1';
             document.location.reload(true);
         });
 });
@@ -148,6 +165,6 @@ $('#shopping-cart-button').on('mouseleave', function () {
     $('#shopping-cart-menu').addClass('hidden');
 });
 
-router.run('#/');
+router.run('#/home/1');
 let sammyApp = {};
 export { sammyApp as sammyApp };

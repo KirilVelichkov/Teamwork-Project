@@ -13,5 +13,21 @@ function encryptToSha1(string){
     return toSha1;
 }
 
-var utils = { encryptToBase64, encryptToSha1 };
+function createBooksOnPage(array, pageNumber, booksOnPageCount){
+    var newArray = array.slice((pageNumber - 1) * booksOnPageCount , (pageNumber - 1) * booksOnPageCount + booksOnPageCount);
+    return newArray;
+}
+
+function createPageIndeces(array, booksOnPageCount){
+    var totalBooks = array.length;
+    var buttonsCount = Math.ceil(totalBooks / booksOnPageCount);
+    var array = [];
+    for(var i = 1; i <= buttonsCount; i++){
+        array.push(i);
+    }
+    
+    return array;
+}
+
+var utils = { encryptToBase64, encryptToSha1, createBooksOnPage, createPageIndeces };
 export { utils as UTILS };
