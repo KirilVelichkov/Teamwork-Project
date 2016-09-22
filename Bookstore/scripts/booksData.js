@@ -16,6 +16,7 @@ function getAllBooks() {
             data: JSON.stringify(),
             contentType: 'application/json',
             success: function (response) {
+                console.log(response);
                 resolve(response);
             }
         });
@@ -156,6 +157,9 @@ function getUserBooks() {
     });
 
     return promise;
+}
+
+function orderBooksBy(booksCollection, code) { 
 }
 
 

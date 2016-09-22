@@ -199,3 +199,33 @@ h4 span {
     word-wrap: break-word;
     width:150px;
 }
+
+/*Dropdown menu styles*/
+aside .btn {
+    background-image: none;
+    cursor: default;
+    color: black;
+    background-color: #FFF;
+    border-radius: 4px;
+    text-align: left;
+}
+
+aside .caret {
+
+    position: absolute;
+    right: 16px;
+    top: 16px;
+}
+
+aside .btn-default:hover, aside .btn-default:focus, aside .btn-default:active, aside .btn-default.active, aside .open .dropdown-toggle.btn-default {
+    background-color: #FFF;    
+}
+aside .btn-default:active, aside .btn-default.active, aside .open > .dropdown-toggle.btn-default{
+    color: black;
+}
+aside .btn-group.open .dropdown-toggle {
+    box-shadow: 0 1px 1px #1489F0;
+}
+
+aside .btn-group {width: 100%}
+aside .dropdown-menu {width: 100%;}

@@ -9,6 +9,15 @@ const USER_ID = 'user_id';
 const BOOKS_IN_CART = 'books_in_cart';
 const PAGE_SIZE_BIG = 8;
 const PAGE_SIZE_SMALL = 4;
+const ORDERBY ={
+    DEFAULT: 0,
+    AUTHOR_ASC: 1,
+    AUTHOR_DESC: 2,
+    TITLE_ASC: 3,
+    TITLE_DESC: 4,
+    PRICE_ASC: 5,
+    PRICE_DESC: 6
+};
 
 let constants = {
     AUTH_TOKEN,
@@ -21,6 +30,7 @@ let constants = {
     USER_ID,
     BOOKS_IN_CART,
     PAGE_SIZE_BIG,
-    PAGE_SIZE_SMALL
+    PAGE_SIZE_SMALL,
+    ORDERBY
 };
 export { constants as CONSTANTS };

@@ -8,6 +8,7 @@ import { usersData } from 'usersData';
 
 var router = Sammy('#content', function () {
     var $content = $('#content');
+    var $orderBy = $('#orderby');
     var booksInCart = [];
 
     if (usersData.current()) {
@@ -240,10 +241,13 @@ var router = Sammy('#content', function () {
                     })
                     .then(function (books) {
                         UTILS.addBooksToCart(books);
-                        booksData.addBooksToUser(books);
+                        booksData.addBooksToUser(books);                  
                     });
             });
-
+    });
+    
+    $('.dropdown-menu a').on('click', function () {
+        $orderBy.html($(this).html() + '<span class="caret"></span>');
     });
 });
 

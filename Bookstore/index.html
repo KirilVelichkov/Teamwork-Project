@@ -43,19 +43,35 @@
                     <li><a href="#/genre-info/Classics&1" class="genre-info">Classics</a></li>
                     <li><a href="#/home/1">All</a></li>
                 </ul>
+                <label>Order by:</label>
+                <div class="btn-group">
+                    <button type="button" id="orderby" class="form-control btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            Default<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Default</a></li>
+                        <li><a href="#">Author ascending</a></li>
+                        <li><a href="#">Author descending</a></li>
+                        <li><a href="#">Title ascending</a></li>
+                        <li><a href="#">Title descending</a></li>
+                        <li><a href="#">Price ascending</a></li>
+                        <li><a href="#">Price descending</a></li>
+                    </ul>
+                </div>
             </aside>
 
             <main id="content" class="col-xs-offset-2 col-xs-8">
             </main>
 
             <div id="shopping-cart-menu" class="col-xs-offset-9 col-xs-3 hidden position-fixed">
-               
+
             </div>
         </div>
     </div>
 
     <script src="./node_modules/systemjs/dist/system.js"></script>
     <script src="./config.js"></script>
+    <script src="./bower_components/bootstrap/js/dropdown.js"></script>
 
 </body>
 
