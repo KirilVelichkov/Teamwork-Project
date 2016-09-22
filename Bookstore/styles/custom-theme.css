@@ -9,11 +9,10 @@ header{
     color:white;
 }
 .cart:hover{
-    color:darkgrey;
+    color:#15FF00;
 }
 #cd-cart {
 	position: fixed;
-	
 }
 .btn-circle{
     width: 35px;
@@ -27,6 +26,9 @@ header{
 }
 .position-fixed{
     position:fixed;
+}
+.position-relative{
+    position: relative;
 }
 #container{
     position:relative;
@@ -47,6 +49,9 @@ a {
     color: #446E9B;
     cursor: pointer;
 }
+li{
+    list-style-type: none;
+}
 #navbar-brand-id {
     font-weight: bold;
     font-size: 20px;
@@ -57,13 +62,26 @@ a {
     display: inline-block;
     text-align: middle; 
 }
+.cart-book-info{
+    float:left;
+    padding:0px;
+    color:#446E9B
+}
+.no-padding{
+    padding:0px;
+}
 #login-control, #search-control {
     margin: 5px;
 }
 #shopping-cart-menu{
     top:50px;
     border: 2px solid #E5E5E5;
+    color: #446E9B;
     border-radius: 5px;
+    padding:5px;
+}
+.activated{
+    color:#15FF00;
 }
 .hidden {
     display: none;
@@ -85,6 +103,11 @@ a {
 h4 span {
     font-weight: normal;
 }
+.extra-small{
+    width: 80px;
+    height: 120px;
+    margin: 5px;
+}
 .small {
     margin-top:10px;
     width: 150px;
@@ -101,10 +124,25 @@ h4 span {
     font-family: Consolas,monaco,monospace;
     font-weight: bold;
 }
+.book-price-green{
+    color:limegreen;
+    font-family: Consolas,monaco,monospace;
+    font-weight: bold;
+}
+.overflow-scroll{
+    overflow-y: scroll;
+    height: 420px;
+}
+.price-container{
+        border: 1px solid #E5E5E5;
+}
 .book-container {
     font-family: "Franklin Gothic Medium","Franklin Gothic","ITC Franklin Gothic",Arial,sans-serif;
     float: left;
     margin: 10px;
+}
+.shopping-cart-book-container{
+    border: 1px solid #E5E5E5;
 }
 .book-presentation-container{
     border: 2px solid #E5E5E5;
@@ -118,6 +156,27 @@ h4 span {
     bottom: 0;
     left:0;
 }
+.book-cart-price{
+    font-weight: bold;
+    position: absolute;
+    bottom: 0;
+    left: 90px;
+}
+.btn-remove{
+    right:0px;
+    position: absolute;
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    border: 1px solid white;
+    text-align: center;
+    line-height: 14px;
+    font-weight: bold;
+    background-color: red;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+}
 .book-presentation-title{
     font-weight: bold;
     width:160px;
@@ -126,9 +185,17 @@ h4 span {
     font-weight: bold;
     width:160px;
 }
-
 .book-container a {
     color: black;
     font-weight: normal;
 }
-
+.flex-content{
+    border: 2px solid #E5E5E5;
+    border-radius: 5px;
+    display:flex;
+    margin:5px;
+}
+.word-wrap{
+    word-wrap: break-word;
+    width:150px;
+}

@@ -7,8 +7,8 @@ const AUTORIZATION_STRING = `${APP_ID}:${APP_SECRET}`;
 const AUTORIZATION_STRING_MASTER = `${APP_ID}:${APP_MASTER}`;
 const USER_ID = 'user_id';
 const BOOKS_IN_CART = 'books_in_cart';
-const PAGE_SIZE_BIG = 10;
-const PAGE_SIZE_SMALL = 5;
+const PAGE_SIZE_BIG = 8;
+const PAGE_SIZE_SMALL = 4;
 
 let constants = {
     AUTH_TOKEN,

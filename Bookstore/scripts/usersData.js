@@ -37,7 +37,8 @@ var register = function(newUser){
     var promise = new Promise(function(resolve, reject){
         var requestedUser = {
             username: newUser.username,
-            password: UTILS.encryptToSha1(newUser.password)
+            password: UTILS.encryptToSha1(newUser.password),
+            booksInCart: []
         };
 
         var autorizationHeader = UTILS.encryptToBase64(CONSTANTS.AUTORIZATION_STRING);

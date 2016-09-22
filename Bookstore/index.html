@@ -18,8 +18,8 @@
             <form class="navbar-form navbar-right" role="search" id="search-control">
                 <input type="text" class="form-control" placeholder="Search title">
                 <button type="submit" class="btn btn-info" id="search-btn">Search</button>
-                <a href="#/detailed-search" class="btn btn-info" id="detailed-btn">Detailed Search</a>
-                <a href="#/shopping-cart" id="shopping-cart-button" class="btn btn-circle">
+                <a href="#/detailed-search" class="btn btn-info hidden" id="detailed-btn">Detailed Search</a>
+                <a id="shopping-cart-button" class="btn btn-circle hidden">
                     <span class="glyphicon glyphicon-shopping-cart cart"></span>
                 </a>
             </form>
@@ -27,7 +27,7 @@
             <div class="navbar-right" id="login-control">
                 <a id="nav-btn-login" class="btn btn-info" href="#/login">Login</a>
                 <a id="nav-btn-register" class="btn btn-info" href="#/register">Register</a>
-                <a id="nav-btn-logout" class="btn btn-info" href="#/">Logout</a>
+                <a id="nav-btn-logout" class="btn btn-info  hidden" href="#/">Logout</a>
             </div>
         </nav>
     </header>
@@ -44,32 +44,16 @@
                     <li><a href="#/home/1">All</a></li>
                 </ul>
             </aside>
-            <main id="content" class="col-xs-offset-2 col-xs-9">
+
+            <main id="content" class="col-xs-offset-2 col-xs-8">
             </main>
-            <div id="shopping-cart-menu" class="col-xs-offset-11 hidden position-fixed">
-                <ul class="cd-cart-items">
-                    <li>
-                        <!-- ... -->
-                    </li>
 
-                    <li>
-                        <!-- ... -->
-                    </li>
-                </ul>
-                <!-- cd-cart-items -->
-
-                <div class="cd-cart-total">
-                    <p>Total <span>$39.96</span></p>
-                </div>
-                <!-- cd-cart-total -->
-
-                <a href="#0" class="checkout-btn">Checkout</a>
-
-                <p class="cd-go-to-cart"><a href="#0">Go to cart page</a></p>
+            <div id="shopping-cart-menu" class="col-xs-offset-9 col-xs-3 hidden position-fixed">
+               
             </div>
         </div>
     </div>
-    
+
     <script src="./node_modules/systemjs/dist/system.js"></script>
     <script src="./config.js"></script>
 

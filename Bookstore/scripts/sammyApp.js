@@ -8,16 +8,25 @@ import { usersData } from 'usersData';
 
 var router = Sammy('#content', function () {
     var $content = $('#content');
+    var booksInCart = [];
+
+    if (usersData.current()) {
+        $('#nav-btn-login, #nav-btn-register').toggle('hidden');
+        $('#shopping-cart-button').removeClass('hidden');
+        $('#nav-btn-logout').removeClass('hidden');
+        $('#detailed-btn').removeClass('hidden');
+    } else {
+        $('#shopping-cart-button').addClass('hidden');
+        $('#nav-btn-logout').addClass('hidden');
+        $('#detailed-btn').addClass('hidden');
+    }
 
     this.get('#/home/:pageNumber', function () {
         var pageNumber = this.params['pageNumber'];
         var totalBooks;
         var booksOnPage;
         var pageIndeces;
-        // booksData.addBookToCart().then(function(result){
-        //     console.log(result.booksInCart);
-            
-        // });
+
 
         booksData.getAllBooks()
             .then(function (result) {
@@ -27,11 +36,10 @@ var router = Sammy('#content', function () {
                     books: booksOnPage,
                     indeces: pageIndeces
                 };
-                
+
                 return templates.get('home');
             })
             .then(function (template) {
-                
                 $content.html(template(totalBooks));
 
                 $('.book-title').on('click', function () {
@@ -59,7 +67,7 @@ var router = Sammy('#content', function () {
 
                     usersData.login(logUser)
                         .then(function (response) {
-                            context.redirect('#/');
+                            context.redirect('#/home/1');
                             document.location.reload(true);
                         });
                 });
@@ -82,7 +90,7 @@ var router = Sammy('#content', function () {
 
                     usersData.register(newUser)
                         .then(function (response) {
-                            context.redirect('#/');
+                            context.redirect('#/home/1');
                             document.location.reload(true);
                         });
                 });
@@ -122,8 +130,6 @@ var router = Sammy('#content', function () {
     this.get('#/book-info', function (context) {
         var currentTitle = localStorage.getItem('CURRENT_TITLE');
         var book;
-        console.log(usersData.current());
-        
 
         booksData.getBookByTitle(currentTitle)
             .then(function (result) {
@@ -132,40 +138,113 @@ var router = Sammy('#content', function () {
             })
             .then(function (template) {
                 $content.html(template(book));
+                if (usersData.current()) {
+                    $('#btn-like').removeClass('hidden');
+                    $('#btn-dislike').removeClass('hidden');
+                    $('#btn-add-to-cart').removeClass('hidden');
+                } else {
+                    $('#btn-like').addClass('hidden');
+                    $('#btn-dislike').addClass('hidden');
+                    $('#btn-add-to-cart').addClass('hidden');
+                }
 
                 $('#btn-like').on('click', function () {
                     booksData.rateBookPositive(book);
                 });
+
                 $('#btn-dislike').on('click', function () {
                     booksData.rateBookNegative(book);
+                });
+
+                $('#btn-add-to-cart').on('click', function () {
+                    let canAdd = true;
+                    let pictureURL = book.picture._downloadURL;
+                    let author = book.author;
+                    let title = book.title;
+                    let price = book.price;
+                    let bookId = book._id;
+                    let bookToPush = {};
+
+
+                    booksData.getUserBooks().then(function (user) {
+                        booksInCart = user.booksInCart;
+                        (booksInCart).forEach(function (book) {
+                            if (book.bookId === bookId) {
+                                canAdd = false;
+                                UTILS.addBooksToCart(booksInCart);
+                                return;
+                            }
+                        });
+
+                        if (canAdd) {
+                            bookToPush = user.booksInCart;
+                            bookToPush.push({
+                                bookId,
+                                author,
+                                title,
+                                price,
+                                pictureURL
+                            });
+                            UTILS.addBooksToCart(booksInCart);
+                            booksData.addBooksToUser(bookToPush);
+                        }
+                    });
                 });
             });
     });
 
-});
 
-if (usersData.current()) {
-    $('#nav-btn-login, #nav-btn-register').toggle('hidden');
 
-} else {
-    $('#nav-btn-logout').toggle('hidden');
-    $('#detailed-btn').toggle('hidden');
-}
+    $('#nav-btn-logout').on('click', function () {
+        usersData.logout()
+            .then(function () {
+                location = '#/home/1';
+                document.location.reload(true);
+            });
+    });
 
-$('#nav-btn-logout').on('click', function () {
-    usersData.logout()
-        .then(function () {
-            location = '#/home/1';
-            document.location.reload(true);
+    $('#shopping-cart-button').on('click', function () {
+        $('#shopping-cart-menu').toggleClass('hidden');
+        $('.cart').toggleClass('activated');
+
+        booksData.getUserBooks().then(function (result) {
+            UTILS.addBooksToCart(result.booksInCart);
+
         });
-});
+    });
 
-$('#shopping-cart-button').on('mouseenter', function () {
-    $('#shopping-cart-menu').removeClass('hidden');
-});
+    $('#shopping-cart-menu').on('click', '.btn-remove', function () {
+        let bookToRemoveTitle = $(this).parent().
+            find($('.book-characteristics')).
+            find('.book-title').text();
+        let updatedBooksAfterRemoval;
+        let idToRemove;
 
-$('#shopping-cart-button').on('mouseleave', function () {
-    $('#shopping-cart-menu').addClass('hidden');
+        booksData.getBookByTitle(bookToRemoveTitle)
+            .then(function (result) {
+                idToRemove = result[0]._id;
+            })
+            .then(function (res) {
+                booksData.getUserBooks()
+                    .then(function (userBooks) {
+                        updatedBooksAfterRemoval = JSON.parse(JSON.stringify(userBooks.booksInCart));
+
+                        (userBooks.booksInCart).forEach(function (book) {
+                            if (book.bookId === idToRemove) {
+                                updatedBooksAfterRemoval.splice(idToRemove, 1);
+                                return;
+                            }
+                        });
+
+                        return updatedBooksAfterRemoval;
+                    })
+                    .then(function (books) {
+                        UTILS.addBooksToCart(books);
+                        booksData.addBooksToUser(books);
+                    });
+            });
+
+    });
 });
 
 router.run('#/home/1');

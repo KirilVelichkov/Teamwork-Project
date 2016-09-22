@@ -1,33 +1,52 @@
 import CryptoJS from 'cryptojs';
+import { templates } from 'templates';
 
-function encryptToBase64(string){
-    var toUtf8 = CryptoJS.enc.Utf8.parse(string); 
+function encryptToBase64(string) {
+    var toUtf8 = CryptoJS.enc.Utf8.parse(string);
     var base64 = CryptoJS.enc.Base64.stringify(toUtf8);
 
     return base64;
 }
 
-function encryptToSha1(string){
+function encryptToSha1(string) {
     var toSha1 = CryptoJS.SHA1(string).toString();
 
     return toSha1;
 }
 
-function createBooksOnPage(array, pageNumber, booksOnPageCount){
-    var newArray = array.slice((pageNumber - 1) * booksOnPageCount , (pageNumber - 1) * booksOnPageCount + booksOnPageCount);
+function createBooksOnPage(array, pageNumber, booksOnPageCount) {
+    var newArray = array.slice((pageNumber - 1) * booksOnPageCount, (pageNumber - 1) * booksOnPageCount + booksOnPageCount);
     return newArray;
 }
 
-function createPageIndeces(array, booksOnPageCount){
+function createPageIndeces(array, booksOnPageCount) {
     var totalBooks = array.length;
     var buttonsCount = Math.ceil(totalBooks / booksOnPageCount);
     var array = [];
-    for(var i = 1; i <= buttonsCount; i++){
+    for (var i = 1; i <= buttonsCount; i++) {
         array.push(i);
     }
-    
+
     return array;
 }
 
-var utils = { encryptToBase64, encryptToSha1, createBooksOnPage, createPageIndeces };
+
+function addBooksToCart(books) {
+    let templateToParse,
+        totalPrice = 0;
+    
+    books.forEach(function(book){
+        totalPrice += book.price;
+    });
+    totalPrice = parseFloat(totalPrice.toString()).toFixed(2);
+    templateToParse = {
+        books,
+        totalPrice
+    };
+
+    templates.get('shopping-cart-menu').then((template) => {
+        $('#shopping-cart-menu').html(template(templateToParse));
+    });
+}
+var utils = { encryptToBase64, encryptToSha1, createBooksOnPage, createPageIndeces, addBooksToCart };
 export { utils as UTILS };
