@@ -20,7 +20,7 @@ let constants = {
     AUTORIZATION_STRING_MASTER, 
     USER_ID,
     BOOKS_IN_CART,
-    PAGE_BIG,
-    PAGE_SMALL
+    PAGE_SIZE_BIG,
+    PAGE_SIZE_SMALL
 };
 export { constants as CONSTANTS };

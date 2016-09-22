@@ -18,5 +18,5 @@ TO DOs...
 // only logged users to rate + rate only once
 // unit tests
 // add book to favorites
-// add pagination
+// add pagination - done
 // implement 3rd party API

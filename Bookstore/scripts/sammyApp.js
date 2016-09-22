@@ -27,10 +27,11 @@ var router = Sammy('#content', function () {
                     books: booksOnPage,
                     indeces: pageIndeces
                 };
-
+                
                 return templates.get('home');
             })
             .then(function (template) {
+                
                 $content.html(template(totalBooks));
 
                 $('.book-title').on('click', function () {
@@ -121,6 +122,8 @@ var router = Sammy('#content', function () {
     this.get('#/book-info', function (context) {
         var currentTitle = localStorage.getItem('CURRENT_TITLE');
         var book;
+        console.log(usersData.current());
+        
 
         booksData.getBookByTitle(currentTitle)
             .then(function (result) {
