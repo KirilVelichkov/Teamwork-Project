@@ -8,7 +8,7 @@ import { usersData } from 'usersData';
 
 var router = Sammy('#content', function () {
     var $content = $('#content');
-    var $orderBy = $('#orderby');
+    var $orderByChoice = $('#orderby > .dropdown-toggle');
     var booksInCart = [];
 
     if (usersData.current()) {
@@ -22,12 +22,14 @@ var router = Sammy('#content', function () {
         $('#detailed-btn').addClass('hidden');
     }
 
-    this.get('#/home/:pageNumber', function () {
+    this.get('#/home/?:pageNumber&:orderByCode', function () {
         var pageNumber = this.params['pageNumber'];
+        var orderByCode = this.params['orderByCode']; 
         var totalBooks;
         var booksOnPage;
         var pageIndeces;
 
+        UTILS.setupOrderByLinks();
 
         booksData.getAllBooks()
             .then(function (result) {
@@ -48,6 +50,11 @@ var router = Sammy('#content', function () {
                     localStorage.setItem('CURRENT_TITLE', currentTitle);
                 });
             });
+    });
+
+    this.get('#/home/:pageNumber', function(context){
+        var pageNum = this.params["pageNumber"];
+        context.redirect(`#/home/${pageNum}&${CONSTANTS.ORDERBY.DEFAULT}`);
     });
 
     this.get('#/login', function (context) {
@@ -98,12 +105,15 @@ var router = Sammy('#content', function () {
             });
     });
 
-    this.get('#/genre-info/?:genre&:pageNumber', function (context) {
+    this.get('#/genre-info/?:genre&:pageNumber&:orderByCode', function (context) {
         var genre = this.params['genre'];
         var pageNumber = this.params['pageNumber'];
+        var orderByCode = this.params['orderByCode'];
         var category;
         var booksOnPage;
         var pageIndeces;
+
+        UTILS.setupOrderByLinks();
 
         booksData.getBooksByGenre(genre)
             .then(function (result) {
@@ -126,6 +136,12 @@ var router = Sammy('#content', function () {
                     localStorage.setItem('CURRENT_TITLE', currentTitle);
                 });
             });
+    });
+
+    this.get('#/genre-info/?:genre&:pageNumber', function (context) {
+        var pageNum = this.params["pageNumber"],
+            genre = this.params["genre"];
+        context.redirect(`#/genre-info/${genre}&${pageNum}&${CONSTANTS.ORDERBY.DEFAULT}`);
     });
 
     this.get('#/book-info', function (context) {
@@ -247,7 +263,7 @@ var router = Sammy('#content', function () {
     });
     
     $('.dropdown-menu a').on('click', function () {
-        $orderBy.html($(this).html() + '<span class="caret"></span>');
+        $orderByChoice.html($(this).html() + '<span class="caret"></span>');
     });
 });
 

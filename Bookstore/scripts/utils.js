@@ -1,5 +1,6 @@
 import CryptoJS from 'cryptojs';
 import { templates } from 'templates';
+import $ from 'jquery';
 
 function encryptToBase64(string) {
     var toUtf8 = CryptoJS.enc.Utf8.parse(string);
@@ -48,5 +49,16 @@ function addBooksToCart(books) {
         $('#shopping-cart-menu').html(template(templateToParse));
     });
 }
-var utils = { encryptToBase64, encryptToSha1, createBooksOnPage, createPageIndeces, addBooksToCart };
+
+function setupOrderByLinks(){
+    let orderByLinks = $("#orderby > ul.dropdown-menu > li > a");
+    orderByLinks.each((i, link) => {
+        var url = window.location
+                        .toString()
+                        .substr(0, window.location.toString().length - 1) + i;
+        
+        link.href = url;
+    });
+}
+var utils = { encryptToBase64, encryptToSha1, createBooksOnPage, createPageIndeces, addBooksToCart, setupOrderByLinks};
 export { utils as UTILS };

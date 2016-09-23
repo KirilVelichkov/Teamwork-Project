@@ -223,6 +223,12 @@ aside .btn-default:hover, aside .btn-default:focus, aside .btn-default:active, a
 aside .btn-default:active, aside .btn-default.active, aside .open > .dropdown-toggle.btn-default{
     color: black;
 }
+aside .btn-default:focus, aside .btn-default.focus{
+    color: black;
+    background-color: none;
+    background-image: none;
+
+}
 aside .btn-group.open .dropdown-toggle {
     box-shadow: 0 1px 1px #1489F0;
 }
