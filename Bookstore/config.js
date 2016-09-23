@@ -13,10 +13,7 @@ SystemJS.config({
         'constants': './scripts/constants.js',
         'utils': './scripts/utils.js',
         'sammyApp': './scripts/sammyApp.js',
-        'bootstrap': './bower_components/bootstrap/dist/js/bootstrap.min.js'
     }
 });
 
-System.import('jquery');
-System.import('bootstrap');
 System.import('sammyApp');
