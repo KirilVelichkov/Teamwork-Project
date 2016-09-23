@@ -68,7 +68,7 @@ function resetOrderByTypeOnChange() {
 
 function getShortUrl(longUrl, func){
     $.getJSON(
-        "http://api.bitly.com/v3/shorten?callback=?",
+        "https://api-ssl.bitly.com/v3/shorten?callback=?",
         { 
             "format": "json",
             "apiKey": CONSTANTS.BITLY_AUTHORIZATION.API_KEY,
