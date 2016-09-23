@@ -267,6 +267,14 @@ var router = Sammy('#content', function () {
     $('.dropdown-menu a').on('click', function () {
         $orderByChoice.html($(this).html() + '<span class="caret"></span>');
     });
+
+    $('aside > ul.nav.nav-pills.nav-stacked > li > a').each((i, item) => {
+        if(i === 0){
+        }
+        else{
+            item.addEventListener('click', UTILS.resetOrderByTypeOnChange);
+        }
+    });
 });
 
 router.run('#/home/1');

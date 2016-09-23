@@ -51,7 +51,7 @@ function addBooksToCart(books) {
 }
 
 function setupOrderByLinks(){
-    let orderByLinks = $("#orderby > ul.dropdown-menu > li > a");
+    let orderByLinks = $('#orderby > ul.dropdown-menu > li > a');
     orderByLinks.each((i, link) => {
         var url = window.location
                         .toString()
@@ -60,5 +60,8 @@ function setupOrderByLinks(){
         link.href = url;
     });
 }
-var utils = { encryptToBase64, encryptToSha1, createBooksOnPage, createPageIndeces, addBooksToCart, setupOrderByLinks};
+function resetOrderByTypeOnChange(){
+    $('#orderby > .dropdown-toggle').html('Default <span class="caret"></span>');
+}
+var utils = { encryptToBase64, encryptToSha1, createBooksOnPage, createPageIndeces, addBooksToCart, setupOrderByLinks, resetOrderByTypeOnChange};
 export { utils as UTILS };

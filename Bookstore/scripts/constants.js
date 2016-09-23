@@ -9,7 +9,7 @@ const USER_ID = 'user_id';
 const BOOKS_IN_CART = 'books_in_cart';
 const PAGE_SIZE_BIG = 8;
 const PAGE_SIZE_SMALL = 4;
-const ORDERBY ={
+const ORDERBY = {
     DEFAULT: 0,
     AUTHOR_ASC: 1,
     AUTHOR_DESC: 2,
@@ -31,6 +31,6 @@ let constants = {
     BOOKS_IN_CART,
     PAGE_SIZE_BIG,
     PAGE_SIZE_SMALL,
-    ORDERBY
+    ORDERBY,
 };
 export { constants as CONSTANTS };

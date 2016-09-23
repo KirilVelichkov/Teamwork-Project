@@ -202,7 +202,6 @@ function orderBooksBy(booksCollection, code) {
 
             return 0;
         });
-        console.log(booksCollection);
         return newArr;
     }
 
