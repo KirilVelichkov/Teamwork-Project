@@ -35,8 +35,8 @@ function createPageIndeces(array, booksOnPageCount) {
 function addBooksToCart(books) {
     let templateToParse,
         totalPrice = 0;
-    
-    books.forEach(function(book){
+
+    books.forEach(function (book) {
         totalPrice += book.price;
     });
     totalPrice = parseFloat(totalPrice.toString()).toFixed(2);
@@ -50,18 +50,20 @@ function addBooksToCart(books) {
     });
 }
 
-function setupOrderByLinks(){
+function setupOrderByLinks() {
     let orderByLinks = $('#orderby > ul.dropdown-menu > li > a');
     orderByLinks.each((i, link) => {
         var url = window.location
-                        .toString()
-                        .substr(0, window.location.toString().length - 1) + i;
-        
+            .toString()
+            .substr(0, window.location.toString().length - 1) + i;
+
         link.href = url;
     });
 }
-function resetOrderByTypeOnChange(){
+
+function resetOrderByTypeOnChange() {
     $('#orderby > .dropdown-toggle').html('Default <span class="caret"></span>');
 }
-var utils = { encryptToBase64, encryptToSha1, createBooksOnPage, createPageIndeces, addBooksToCart, setupOrderByLinks, resetOrderByTypeOnChange};
+
+var utils = { encryptToBase64, encryptToSha1, createBooksOnPage, createPageIndeces, addBooksToCart, setupOrderByLinks, resetOrderByTypeOnChange };
 export { utils as UTILS };

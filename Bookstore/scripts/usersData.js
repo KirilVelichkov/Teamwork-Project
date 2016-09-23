@@ -2,9 +2,10 @@ import $ from 'jquery';
 import { CONSTANTS } from 'constants';
 import { UTILS } from 'utils';
 import { templates } from 'templates';
+import * as toastr from 'toastr';
 
-var login = function(logUser){
-    var promise = new Promise(function(resolve, reject){
+var login = function (logUser) {
+    var promise = new Promise(function (resolve, reject) {
         var requestedUser = {
             username: logUser.username,
             password: UTILS.encryptToSha1(logUser.password)
@@ -20,21 +21,34 @@ var login = function(logUser){
             },
             data: JSON.stringify(requestedUser),
             contentType: 'application/json',
-            success: function(response){
+            success: function (response) {
                 localStorage.setItem(CONSTANTS.AUTH_TOKEN, response._kmd.authtoken);
                 localStorage.setItem(CONSTANTS.USER_NAME, response.username);
                 localStorage.setItem(CONSTANTS.USER_ID, response._id);
-                
+
                 resolve(response);
+            },
+            fail: function (err) {
+                console.log(11);
+
+                reject(err);
+            },
+            statusCode: {
+                400: function () {
+                    toastr.error('Invalid username or password');
+                },
+                401: function () {
+                    toastr.error('Invalid username or password');
+                }
             }
-        });
-    }); 
+            });
+    });
 
     return promise;
 };
 
-var register = function(newUser){
-    var promise = new Promise(function(resolve, reject){
+var register = function (newUser) {
+    var promise = new Promise(function (resolve, reject) {
         var requestedUser = {
             username: newUser.username,
             password: UTILS.encryptToSha1(newUser.password),
@@ -51,17 +65,25 @@ var register = function(newUser){
             },
             data: JSON.stringify(requestedUser),
             contentType: 'application/json',
-            success: function(response){
+            success: function (response) {
                 resolve(response);
+            },
+            fail: function (err) {
+                reject(err);
+            },
+            statusCode: {
+                409: function () {
+                    toastr.warning('User already exist');
+                }
             }
         });
-    }); 
+    });
 
     return promise;
 };
 
-var logout = function(){
-    var promise = new Promise(function (resolve, reject){
+var logout = function () {
+    var promise = new Promise(function (resolve, reject) {
         localStorage.removeItem(CONSTANTS.AUTH_TOKEN);
         localStorage.removeItem(CONSTANTS.USER_NAME);
         localStorage.removeItem(CONSTANTS.USER_ID);
@@ -71,12 +93,12 @@ var logout = function(){
     return promise;
 };
 
-var current = function(){
+var current = function () {
     var username = localStorage.getItem(CONSTANTS.USER_NAME);
     var token = localStorage.getItem(CONSTANTS.AUTH_TOKEN);
     var user_id = localStorage.getItem(CONSTANTS.USER_ID);
-    
-    if(!username){
+
+    if (!username) {
         return null;
     } else {
         return {
@@ -84,7 +106,7 @@ var current = function(){
             token: token,
             user_id: user_id
         };
-    }   
+    }
 };
 
 let usersData = { login, register, logout, current };
