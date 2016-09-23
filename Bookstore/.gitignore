@@ -1,3 +1,0 @@
-#Ignore these paths so we don't need to delete them every time we push
-node_modules
-bower_components
