@@ -152,13 +152,13 @@ var router = Sammy('#content', function () {
     });
 
     this.get('#/genre-info/?:genre&:pageNumber', function (context) {
-        var pageNum = this.params["pageNumber"],
-            genre = this.params["genre"];
+        var pageNum = this.params['pageNumber'],
+            genre = this.params['genre'];
         context.redirect(`#/genre-info/${genre}&${pageNum}&${CONSTANTS.ORDERBY.DEFAULT}`);
     });
 
-    this.get('#/book-info', function (context) {
-        var currentTitle = localStorage.getItem('CURRENT_TITLE');
+    this.get('#/book-info/:title', function (context) {
+        var currentTitle = this.params['title'];
         var book;
 
         booksData.getBookByTitle(currentTitle)
@@ -185,6 +185,9 @@ var router = Sammy('#content', function () {
                 $('#btn-dislike').on('click', function () {
                     booksData.rateBookNegative(book);
                 });
+
+                $('#reddit-submit').attr('href', 
+                    `${$('#reddit-submit').attr('href')}&url=${encodeURIComponent(window.location)}`);
 
                 $('#btn-add-to-cart').on('click', function () {
                     let canAdd = true;
@@ -225,6 +228,10 @@ var router = Sammy('#content', function () {
             });
     });
 
+    this.get('#/book-info', function(context){
+        var localTitle = localStorage.getItem('CURRENT_TITLE');
+        context.redirect(`#/book-info/${localTitle}`);
+    });
 
 
     $('#nav-btn-logout').on('click', function () {
