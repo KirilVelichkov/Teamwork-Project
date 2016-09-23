@@ -9,6 +9,10 @@ const USER_ID = 'user_id';
 const BOOKS_IN_CART = 'books_in_cart';
 const PAGE_SIZE_BIG = 8;
 const PAGE_SIZE_SMALL = 4;
+const BITLY_AUTHORIZATION = {
+    LOGIN: 'o_2a2sif2071',
+    API_KEY: 'R_dd5f34358ad045f2aea412536f38b2e5'
+};
 const ORDERBY = {
     DEFAULT: 0,
     AUTHOR_ASC: 1,
@@ -32,5 +36,6 @@ let constants = {
     PAGE_SIZE_BIG,
     PAGE_SIZE_SMALL,
     ORDERBY,
+    BITLY_AUTHORIZATION
 };
 export { constants as CONSTANTS };

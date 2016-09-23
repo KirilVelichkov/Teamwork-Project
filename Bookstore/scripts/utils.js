@@ -1,6 +1,7 @@
 import CryptoJS from 'cryptojs';
 import { templates } from 'templates';
 import $ from 'jquery';
+import { CONSTANTS } from 'constants';
 
 function encryptToBase64(string) {
     var toUtf8 = CryptoJS.enc.Utf8.parse(string);
@@ -65,5 +66,21 @@ function resetOrderByTypeOnChange() {
     $('#orderby > .dropdown-toggle').html('Default <span class="caret"></span>');
 }
 
-var utils = { encryptToBase64, encryptToSha1, createBooksOnPage, createPageIndeces, addBooksToCart, setupOrderByLinks, resetOrderByTypeOnChange };
+function getShortUrl(longUrl, func){
+    $.getJSON(
+        "http://api.bitly.com/v3/shorten?callback=?",
+        { 
+            "format": "json",
+            "apiKey": CONSTANTS.BITLY_AUTHORIZATION.API_KEY,
+            "login": CONSTANTS.BITLY_AUTHORIZATION.LOGIN,
+            "longUrl": longUrl
+        },
+        function(response)
+        {
+            func(response.data.url);
+        }
+    );
+}
+
+var utils = { encryptToBase64, encryptToSha1, createBooksOnPage, createPageIndeces, addBooksToCart, setupOrderByLinks, resetOrderByTypeOnChange, getShortUrl};
 export { utils as UTILS };
