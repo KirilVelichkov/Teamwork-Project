@@ -188,7 +188,12 @@ var router = Sammy('#content', function () {
 
                 $('#reddit-submit').attr('href', 
                     `${$('#reddit-submit').attr('href')}&url=${encodeURIComponent(window.location)}`);
-
+                
+                $('#facebook-share').on('click',function () {
+                    var shareURL = `https://www.facebook.com/sharer/sharer.php?u=${encodeURI(window.location)}`;
+                    var fbpopup = window.open(shareURL, "pop", "width=600, height=400, scrollbars=no");
+                    return false;
+                });
                 $('#btn-add-to-cart').on('click', function () {
                     let canAdd = true;
                     let pictureURL = book.picture._downloadURL;

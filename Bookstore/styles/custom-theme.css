@@ -235,3 +235,10 @@ aside .btn-group.open .dropdown-toggle {
 
 aside .btn-group {width: 100%}
 aside .dropdown-menu {width: 100%;}
+
+/*Share button styles*/
+.share-btn{
+    cursor: pointer;
+    height: 34px; 
+    display: inline-block
+};
