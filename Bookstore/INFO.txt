@@ -14,7 +14,7 @@ TO DOs...
 // user page (account settings)
 // fix password field  - done
 // add more info to register form
-// implement toastr
+// implement toastr - done
 // only logged users to rate + rate only once
 // unit tests
 // add pagination - done

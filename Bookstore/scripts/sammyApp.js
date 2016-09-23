@@ -5,6 +5,7 @@ import { UTILS } from 'utils';
 import { templates } from 'templates';
 import { booksData } from 'booksData';
 import { usersData } from 'usersData';
+import * as toastr from 'toastr';
 
 var router = Sammy('#content', function () {
     var $content = $('#content');
@@ -24,7 +25,7 @@ var router = Sammy('#content', function () {
 
     this.get('#/home/?:pageNumber&:orderByCode', function () {
         var pageNumber = this.params['pageNumber'];
-        var orderByCode = this.params['orderByCode'] | 0; 
+        var orderByCode = this.params['orderByCode'] | 0;
         var totalBooks;
         var booksOnPage;
         var pageIndeces;
@@ -53,7 +54,7 @@ var router = Sammy('#content', function () {
             });
     });
 
-    this.get('#/home/:pageNumber', function(context){
+    this.get('#/home/:pageNumber', function (context) {
         var pageNum = this.params["pageNumber"];
         context.redirect(`#/home/${pageNum}&${CONSTANTS.ORDERBY.DEFAULT}`);
     });
@@ -76,8 +77,15 @@ var router = Sammy('#content', function () {
 
                     usersData.login(logUser)
                         .then(function (response) {
+                            $('#nav-btn-logout').removeClass('hidden');
+                            $('#detailed-btn').removeClass('hidden');
+                            $('#shopping-cart-button').removeClass('hidden');
+                            $('#nav-btn-register').addClass('hidden');
+                            $('#nav-btn-login').addClass('hidden');
+
                             context.redirect('#/home/1');
-                            document.location.reload(true);
+                            toastr.success('Login successful');
+                            //document.location.reload(true);
                         });
                 });
             });
@@ -85,7 +93,7 @@ var router = Sammy('#content', function () {
 
     this.get('#/register', function (context) {
         if (usersData.current()) {
-            context.redirect('#/home/1');
+            context.redirect('#/login');
             return;
         }
         templates.get('register')
@@ -99,8 +107,11 @@ var router = Sammy('#content', function () {
 
                     usersData.register(newUser)
                         .then(function (response) {
-                            context.redirect('#/home/1');
-                            document.location.reload(true);
+                            if (newUser.username.trim() === '' || newUser.password.trim() === '') {
+                                toastr.error("Invalid username or password");
+                            } else {
+                                context.redirect('#/login');
+                            }
                         });
                 });
             });
@@ -190,12 +201,14 @@ var router = Sammy('#content', function () {
                         (booksInCart).forEach(function (book) {
                             if (book.bookId === bookId) {
                                 canAdd = false;
+                                toastr.warning(`${title} - is already in the cart!`);
                                 UTILS.addBooksToCart(booksInCart);
                                 return;
                             }
                         });
 
                         if (canAdd) {
+                            toastr.success(`${title} - successfully added to cart!`);
                             bookToPush = user.booksInCart;
                             bookToPush.push({
                                 bookId,
@@ -215,10 +228,16 @@ var router = Sammy('#content', function () {
 
 
     $('#nav-btn-logout').on('click', function () {
+        $('#shopping-cart-button').addClass('hidden');
+        $('#nav-btn-logout').addClass('hidden');
+        $('#detailed-btn').addClass('hidden');
+        $('#nav-btn-logout').addClass('hidden');
+        $('#nav-btn-login').removeClass('hidden');
+        $('#nav-btn-register').removeClass('hidden');
+
         usersData.logout()
             .then(function () {
-                location = '#/home/1';
-                document.location.reload(true);
+
             });
     });
 
@@ -259,19 +278,19 @@ var router = Sammy('#content', function () {
                     })
                     .then(function (books) {
                         UTILS.addBooksToCart(books);
-                        booksData.addBooksToUser(books);                  
+                        booksData.addBooksToUser(books);
                     });
             });
     });
-    
+
     $('.dropdown-menu a').on('click', function () {
         $orderByChoice.html($(this).html() + '<span class="caret"></span>');
     });
 
     $('aside > ul.nav.nav-pills.nav-stacked > li > a').each((i, item) => {
-        if(i === 0){
+        if (i === 0) {
         }
-        else{
+        else {
             item.addEventListener('click', UTILS.resetOrderByTypeOnChange);
         }
     });
