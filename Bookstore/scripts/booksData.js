@@ -16,7 +16,6 @@ function getAllBooks() {
             data: JSON.stringify(),
             contentType: 'application/json',
             success: function (response) {
-                console.log(response);
                 resolve(response);
             }
         });
@@ -159,7 +158,54 @@ function getUserBooks() {
     return promise;
 }
 
-function orderBooksBy(booksCollection, code) { 
+function orderBooksBy(booksCollection, code) {
+    switch(code){
+        case CONSTANTS.ORDERBY.DEFAULT:
+            return booksCollection;
+        case CONSTANTS.ORDERBY.AUTHOR_ASC:
+            return sortby(booksCollection, "author");
+        case CONSTANTS.ORDERBY.AUTHOR_DESC:
+            return sortby(booksCollection, "author").reverse();
+        case CONSTANTS.ORDERBY.TITLE_ASC:
+            return sortby(booksCollection, "title");
+        case CONSTANTS.ORDERBY.TITLE_DESC:
+            return sortby(booksCollection, "title").reverse();
+        case CONSTANTS.ORDERBY.PRICE_ASC:
+            return sortby(booksCollection, "price");
+        case CONSTANTS.ORDERBY.PRICE_DESC:
+            return sortby(booksCollection, "price").reverse();
+        default:
+            return booksCollection;
+
+    }
+    
+    function sortby(booksCollection, sortBy){
+        var newArr =  booksCollection.sort((a, b) => {
+            var paramA = a[sortBy];
+            var paramB = b[sortBy];
+
+            if(typeof paramA === "string" &&
+                typeof paramB === "string"){
+                paramA = paramA.toUpperCase();
+                paramB = paramB.toUpperCase();
+            }
+            else{
+                paramA = parseFloat(paramA);
+                paramB = parseFloat(paramB);
+            }
+            if(paramA < paramB){
+                return -1;
+            }
+            if(paramA > paramB){
+                return 1;
+            }
+
+            return 0;
+        });
+        console.log(booksCollection);
+        return newArr;
+    }
+
 }
 
 
@@ -170,7 +216,8 @@ let booksData = {
     rateBookNegative,
     rateBookPositive,
     addBooksToUser,
-    getUserBooks
+    getUserBooks,
+    orderBooksBy
 };
 
 export {booksData as booksData};

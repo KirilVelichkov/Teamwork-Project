@@ -24,7 +24,7 @@ var router = Sammy('#content', function () {
 
     this.get('#/home/?:pageNumber&:orderByCode', function () {
         var pageNumber = this.params['pageNumber'];
-        var orderByCode = this.params['orderByCode']; 
+        var orderByCode = this.params['orderByCode'] | 0; 
         var totalBooks;
         var booksOnPage;
         var pageIndeces;
@@ -33,6 +33,7 @@ var router = Sammy('#content', function () {
 
         booksData.getAllBooks()
             .then(function (result) {
+                result = booksData.orderBooksBy(result, orderByCode);
                 booksOnPage = UTILS.createBooksOnPage(result, pageNumber, CONSTANTS.PAGE_SIZE_BIG);
                 pageIndeces = UTILS.createPageIndeces(result, CONSTANTS.PAGE_SIZE_BIG);
                 totalBooks = {
@@ -108,7 +109,7 @@ var router = Sammy('#content', function () {
     this.get('#/genre-info/?:genre&:pageNumber&:orderByCode', function (context) {
         var genre = this.params['genre'];
         var pageNumber = this.params['pageNumber'];
-        var orderByCode = this.params['orderByCode'];
+        var orderByCode = this.params['orderByCode'] | 0;
         var category;
         var booksOnPage;
         var pageIndeces;
@@ -117,6 +118,7 @@ var router = Sammy('#content', function () {
 
         booksData.getBooksByGenre(genre)
             .then(function (result) {
+                result = booksData.orderBooksBy(result, orderByCode);
                 booksOnPage = UTILS.createBooksOnPage(result, pageNumber, CONSTANTS.PAGE_SIZE_SMALL);
                 pageIndeces = UTILS.createPageIndeces(result, CONSTANTS.PAGE_SIZE_SMALL);
 
