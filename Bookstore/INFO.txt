@@ -4,7 +4,7 @@ bower install
 
 
 TO DOs...
-// add shopping cart
+// add shopping cart - half done
 // fix ratings - done (ratings updates instantly now ;)  )
 // add book price - done
 // show books by author
@@ -17,6 +17,5 @@ TO DOs...
 // implement toastr
 // only logged users to rate + rate only once
 // unit tests
-// add book to favorites
 // add pagination - done
-// implement 3rd party API
+// implement 3rd party API - done
