@@ -62,25 +62,30 @@ function setupOrderByLinks() {
     });
 }
 
+function fixPaginationForOrderBy(orderByCode) {
+    $('.btn.btn-primary.btn-page').each(function (i, btn) {
+        btn.href += `&${orderByCode}`;
+    });
+}
+
 function resetOrderByTypeOnChange() {
     $('#orderby > .dropdown-toggle').html('Default <span class="caret"></span>');
 }
 
-function getShortUrl(longUrl, func){
+function getShortUrl(longUrl, func) {
     $.getJSON(
         "https://api-ssl.bitly.com/v3/shorten?callback=?",
-        { 
+        {
             "format": "json",
             "apiKey": CONSTANTS.BITLY_AUTHORIZATION.API_KEY,
             "login": CONSTANTS.BITLY_AUTHORIZATION.LOGIN,
             "longUrl": longUrl
         },
-        function(response)
-        {
+        function (response) {
             func(response.data.url);
         }
     );
 }
 
-var utils = { encryptToBase64, encryptToSha1, createBooksOnPage, createPageIndeces, addBooksToCart, setupOrderByLinks, resetOrderByTypeOnChange, getShortUrl};
+var utils = { encryptToBase64, encryptToSha1, createBooksOnPage, createPageIndeces, addBooksToCart, setupOrderByLinks, resetOrderByTypeOnChange, getShortUrl, fixPaginationForOrderBy };
 export { utils as UTILS };

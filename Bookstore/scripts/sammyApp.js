@@ -47,6 +47,7 @@ var router = Sammy('#content', function () {
             .then(function (template) {
                 $content.html(template(totalBooks));
                 $('#filters').removeClass('hidden');
+                UTILS.fixPaginationForOrderBy(orderByCode);
 
                 $('.book-title').on('click', function () {
                     var currentTitle = $(this).html();
@@ -148,6 +149,7 @@ var router = Sammy('#content', function () {
             .then(function (template) {
                 $content.html(template(category));
                 $('#filters').removeClass('hidden');
+                UTILS.fixPaginationForOrderBy(orderByCode);
 
                 $('.book-title').on('click', function () {
                     var currentTitle = $(this).html();
