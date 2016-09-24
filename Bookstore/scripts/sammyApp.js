@@ -46,6 +46,7 @@ var router = Sammy('#content', function () {
             })
             .then(function (template) {
                 $content.html(template(totalBooks));
+                $('#filters').removeClass('hidden');
 
                 $('.book-title').on('click', function () {
                     var currentTitle = $(this).html();
@@ -59,7 +60,7 @@ var router = Sammy('#content', function () {
         context.redirect(`#/home/${pageNum}&${CONSTANTS.ORDERBY.DEFAULT}`);
     });
 
-    this.get('#/login', function (context) {
+    this.get('#/login', function (context) { 
         if (usersData.current()) {
             context.redirect('#/home/1');
             return;
@@ -68,6 +69,7 @@ var router = Sammy('#content', function () {
         templates.get('login')
             .then(function (template) {
                 $content.html(template());
+                $('#filters').addClass('hidden');
 
                 $('#btn-login').on('click', function () {
                     var logUser = {
@@ -99,6 +101,8 @@ var router = Sammy('#content', function () {
         templates.get('register')
             .then(function (template) {
                 $content.html(template());
+                $('#filters').addClass('hidden');
+
                 $('#btn-register').on('click', function () {
                     var newUser = {
                         username: $('#tb-newUsername').val(),
@@ -143,6 +147,7 @@ var router = Sammy('#content', function () {
             })
             .then(function (template) {
                 $content.html(template(category));
+                $('#filters').removeClass('hidden');
 
                 $('.book-title').on('click', function () {
                     var currentTitle = $(this).html();
@@ -159,7 +164,7 @@ var router = Sammy('#content', function () {
 
     this.get('#/book-info/:title', function (context) {
         var currentTitle = this.params['title'];
-        var book;
+        var book; 
 
         booksData.getBookByTitle(currentTitle)
             .then(function (result) {
@@ -168,6 +173,8 @@ var router = Sammy('#content', function () {
             })
             .then(function (template) {
                 $content.html(template(book));
+                $('#filters').addClass('hidden');
+                
                 if (usersData.current()) {
                     $('#btn-like').removeClass('hidden');
                     $('#btn-dislike').removeClass('hidden');
