@@ -23,7 +23,7 @@ var router = Sammy('#content', function () {
         $('#detailed-btn').addClass('hidden');
     }
 
-    this.get('#/home/?:pageNumber&:orderByCode', function () {
+    this.get('#/home/?:pageNumber&:orderByCode', function (context) {
         var pageNumber = this.params['pageNumber'];
         var orderByCode = this.params['orderByCode'] | 0;
         var totalBooks;
@@ -49,6 +49,13 @@ var router = Sammy('#content', function () {
                 $('#filters').removeClass('hidden');
                 UTILS.fixPaginationForOrderBy(orderByCode);
             });
+
+        $('#search-btn').on('click', function () {
+            var currentTitle = $('#search-input').val();
+            $('#search-input').val("");
+            console.log('here');
+            context.redirect(`#/search-by-title/${currentTitle}&${pageNumber}&${orderByCode}`);
+        });
     });
 
     this.get('#/home/:pageNumber', function (context) {
@@ -56,7 +63,7 @@ var router = Sammy('#content', function () {
         context.redirect(`#/home/${pageNum}&${CONSTANTS.ORDERBY.DEFAULT}`);
     });
 
-    this.get('#/login', function (context) { 
+    this.get('#/login', function (context) {
         if (usersData.current()) {
             context.redirect('#/home/1');
             return;
@@ -155,9 +162,44 @@ var router = Sammy('#content', function () {
         context.redirect(`#/genre-info/${genre}&${pageNum}&${CONSTANTS.ORDERBY.DEFAULT}`);
     });
 
+    this.get('#/search-by-title/?:title&:pageNumber&:orderByCode', function (context) {
+        var title = this.params['title'];
+        var pageNumber = this.params['pageNumber'];
+        var orderByCode = this.params['orderByCode'] | 0;
+        console.log(title);
+        console.log(orderByCode);
+        var category;
+        var booksOnPage;
+        var pageIndeces;
+
+        UTILS.setupOrderByLinks();
+
+        booksData.searchBookByTitle(title)
+            .then(function (result) {
+                result = booksData.orderBooksBy(result, orderByCode);
+                console.log(result);
+                booksOnPage = UTILS.createBooksOnPage(result, pageNumber, CONSTANTS.PAGE_SIZE_SMALL);
+                pageIndeces = UTILS.createPageIndeces(result, CONSTANTS.PAGE_SIZE_SMALL);
+
+                category = {
+                    title: title,
+                    books: booksOnPage,
+                    indeces: pageIndeces
+                };
+
+                return templates.get('search-by-title-info');
+            })
+            .then(function (template) {
+                $content.html(template(category));
+                $('#filters').removeClass('hidden');
+                UTILS.fixPaginationForOrderBy(orderByCode);
+            });
+    });
+
+
     this.get('#/book-info/:title', function () {
         var currentTitle = this.params['title'];
-        var book; 
+        var book;
 
         booksData.getBookByTitle(currentTitle)
             .then(function (result) {
@@ -167,7 +209,7 @@ var router = Sammy('#content', function () {
             .then(function (template) {
                 $content.html(template(book));
                 $('#filters').addClass('hidden');
-                
+
                 if (usersData.current()) {
                     $('#btn-like').removeClass('hidden');
                     $('#btn-dislike').removeClass('hidden');
@@ -186,12 +228,12 @@ var router = Sammy('#content', function () {
                     booksData.rateBookNegative(book);
                 });
 
-                $('#reddit-submit').attr('href', 
+                $('#reddit-submit').attr('href',
                     `${$('#reddit-submit').attr('href')}&url=${encodeURIComponent(window.location.href)}`);
-                
-                UTILS.getShortUrl(window.location.href, function (url){
+
+                UTILS.getShortUrl(window.location.href, function (url) {
                     var shareURL = `https://www.facebook.com/sharer/sharer.php?u=${encodeURI(url)}`;
-                    $('#facebook-share').on('click',function () {
+                    $('#facebook-share').on('click', function () {
                         var fbpopup = window.open(shareURL, "pop", "width=600, height=400, scrollbars=no");
                         return false;
                     });
