@@ -48,11 +48,6 @@ var router = Sammy('#content', function () {
                 $content.html(template(totalBooks));
                 $('#filters').removeClass('hidden');
                 UTILS.fixPaginationForOrderBy(orderByCode);
-
-                $('.book-title').on('click', function () {
-                    var currentTitle = $(this).html();
-                    localStorage.setItem('CURRENT_TITLE', currentTitle);
-                });
             });
     });
 
@@ -151,10 +146,6 @@ var router = Sammy('#content', function () {
                 $('#filters').removeClass('hidden');
                 UTILS.fixPaginationForOrderBy(orderByCode);
 
-                $('.book-title').on('click', function () {
-                    var currentTitle = $(this).html();
-                    localStorage.setItem('CURRENT_TITLE', currentTitle);
-                });
             });
     });
 
@@ -164,7 +155,7 @@ var router = Sammy('#content', function () {
         context.redirect(`#/genre-info/${genre}&${pageNum}&${CONSTANTS.ORDERBY.DEFAULT}`);
     });
 
-    this.get('#/book-info/:title', function (context) {
+    this.get('#/book-info/:title', function () {
         var currentTitle = this.params['title'];
         var book; 
 
@@ -243,11 +234,6 @@ var router = Sammy('#content', function () {
                     });
                 });
             });
-    });
-
-    this.get('#/book-info', function(context){
-        var localTitle = localStorage.getItem('CURRENT_TITLE');
-        context.redirect(`#/book-info/${localTitle}`);
     });
 
 
