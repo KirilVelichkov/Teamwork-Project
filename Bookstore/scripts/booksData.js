@@ -86,6 +86,27 @@ function searchBookByTitle(titleName) {
     });
 }
 
+function searchBookByAuthor(authorName){
+  return new Promise(function (resolve, reject) {
+      var autorizationHeader = UTILS.encryptToBase64(CONSTANTS.AUTORIZATION_STRING_MASTER);
+      var filter = JSON.stringify({
+          "author": {"$regex":`^(?i)${authorName}`}
+      });
+      $.ajax({
+          url: `https://baas.kinvey.com/appdata/${CONSTANTS.APP_ID}/books/?query=${filter}`,
+          method: 'GET',
+          headers: {
+              'Authorization': `Basic ${autorizationHeader}`
+          },
+          data: JSON.stringify(),
+          contentType: 'application/json',
+          success: function (response) {
+              resolve(response);
+          }
+      });
+  });
+}
+
 function rateBookPositive(book) {
     return new Promise(function (resolve, reject) {
         var autorizationHeader = UTILS.encryptToBase64(CONSTANTS.AUTORIZATION_STRING_MASTER);
@@ -234,6 +255,7 @@ let booksData = {
     getBooksByGenre,
     getBookByTitle,
     searchBookByTitle,
+    searchBookByAuthor,
     rateBookNegative,
     rateBookPositive,
     addBooksToUser,
