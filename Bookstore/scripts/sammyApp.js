@@ -175,10 +175,24 @@ var router = Sammy('#content', function () {
  
         UTILS.setupOrderByLinks();
  
-        Promise.all([booksData.searchBookByTitle(query),booksData.searchBookByAuthor(query)])
+        //Promise.all([booksData.searchBookByTitle(query),booksData.searchBookByAuthor(query)])
+          booksData.getAllBooks()
           .then((results)=>{
-            let titleResults = results[0];
-            let authorResults = results[1];
+              console.log(results);
+            let titleResults = [];
+            let authorResults = [];
+            console.log(query);
+              results.forEach(function(item){
+                  if((item.title.toLowerCase()).indexOf(query.toLowerCase())!= -1){
+                      titleResults.push(item);
+                  }
+                  if((item.author.toLowerCase()).indexOf(query.toLowerCase())!= -1){
+                      authorResults.push(item);
+                  }
+              });
+              console.log(titleResults);
+              console.log(authorResults);
+        
             titleResults.push.apply( titleResults, authorResults );
             let result = titleResults;
             booksOnPage = UTILS.createBooksOnPage(result, pageNumber, CONSTANTS.PAGE_SIZE_SMALL);
@@ -189,7 +203,8 @@ var router = Sammy('#content', function () {
                 books: booksOnPage,
                 indeces: pageIndeces
             };
-            return templates.get('search-by-title-info');
+
+            return templates.get('search-by-info');
           })
           .then(function (template) {
               $content.html(template(category));
