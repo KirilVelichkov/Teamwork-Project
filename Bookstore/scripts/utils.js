@@ -87,5 +87,15 @@ function getShortUrl(longUrl, func) {
     );
 }
 
-var utils = { encryptToBase64, encryptToSha1, createBooksOnPage, createPageIndeces, addBooksToCart, setupOrderByLinks, resetOrderByTypeOnChange, getShortUrl, fixPaginationForOrderBy };
+var utils = {
+    encryptToBase64,
+    encryptToSha1,
+    createBooksOnPage,
+    createPageIndeces,
+    addBooksToCart,
+    setupOrderByLinks,
+    resetOrderByTypeOnChange,
+    getShortUrl,
+    fixPaginationForOrderBy
+};
 export { utils as UTILS };

@@ -14,7 +14,6 @@ SystemJS.config({
         'utils': './scripts/utils.js',
         'sammyApp': './scripts/sammyApp.js',
         'toastr':'./bower_components/toastr/toastr.js'
-        
     }
 });
 

@@ -4,12 +4,12 @@ bower install
 
 
 TO DOs...
-// add shopping cart - half done
+// add shopping cart - done
 // fix ratings - done (ratings updates instantly now ;)  )
 // add book price - done
-// show books by author
-// detailed search
-// basic search
+// show books by author 
+// detailed search - removed
+// basic search - done
 // books positioning - done
 // user page (account settings)
 // fix password field  - done

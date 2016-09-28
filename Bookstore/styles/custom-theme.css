@@ -133,6 +133,10 @@ h4 span {
     overflow-y: scroll;
     height: 420px;
 }
+.checkout-cart{
+    overflow-y: scroll;
+    height: 420px;
+}
 .price-container{
         border: 1px solid #E5E5E5;
 }
@@ -195,9 +199,14 @@ h4 span {
     display:flex;
     margin:5px;
 }
+
 .word-wrap{
     word-wrap: break-word;
     width:150px;
+}
+
+.order-details{
+    margin: 10px;
 }
 
 /*Dropdown menu styles*/

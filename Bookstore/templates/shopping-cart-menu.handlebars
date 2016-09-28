@@ -1,4 +1,5 @@
 <ul class="no-padding overflow-scroll">
+{{#if this.books}} 
     {{#each this.books}}
     <li>
         <div class="flex-content position-relative">
@@ -13,12 +14,16 @@
         </div>
     </li>
     {{/each}}
+ {{else}}
+    <li> <h2>Your shopping cart is empty!</h2></li>
+{{/if}}
 </ul>
+
 <!-- cd-cart-items -->
 <div class="price-container">
     <div class="cd-cart-total">
         <h3><span class="bold">Total:</span> <span class="book-price-green">${{this.totalPrice}}</span></h3>
-        <a href="#0" class="checkout-btn">Checkout</a>
+        <a href="#/checkout" class="btn btn-info">Checkout</a>
     </div>
     <!-- cd-cart-total -->
 </div>
