@@ -251,7 +251,6 @@ function orderBooksBy(booksCollection, code) {
 
 }
 
-
 let booksData = {
     getAllBooks,
     getBooksByGenre,
