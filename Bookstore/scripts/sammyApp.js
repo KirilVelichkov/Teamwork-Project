@@ -58,7 +58,7 @@ var router = Sammy('#content', function () {
         $('#search-btn').on('click', function () {
             var searchQuery = $('#search-input').val();
             $('#search-input').val("");
-            console.log('searching', searchQuery);
+
             context.redirect(`#/search/${searchQuery}&${pageNumber}&${orderByCode}`);
         });
     });
@@ -172,8 +172,7 @@ var router = Sammy('#content', function () {
         var query = this.params['query'];
         var pageNumber = this.params['pageNumber'];
         var orderByCode = this.params['orderByCode'] | 0;
-        console.log(query);
-        console.log(orderByCode);
+
         var category;
         var booksOnPage;
         var pageIndeces;
@@ -186,7 +185,7 @@ var router = Sammy('#content', function () {
                 console.log(results);
                 let titleResults = [];
                 let authorResults = [];
-                console.log(query);
+            
                 results.forEach(function (item) {
                     if ((item.title.toLowerCase()).indexOf(query.toLowerCase()) != -1) {
                         titleResults.push(item);
@@ -195,8 +194,6 @@ var router = Sammy('#content', function () {
                         authorResults.push(item);
                     }
                 });
-                console.log(titleResults);
-                console.log(authorResults);
 
                 titleResults.push.apply(titleResults, authorResults);
                 let result = titleResults;
