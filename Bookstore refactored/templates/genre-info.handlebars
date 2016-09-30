@@ -1,0 +1,17 @@
+<h1 id="genre-header">{{this.name}}</h1>
+{{#each this.books}}
+<div class="book-container book-presentation-container">
+    <img src="{{picture._downloadURL}}" class="small" alt="empty">
+    <div class="book-characteristics">
+        <h4 class="book-presentation-title">Title: <a href="#/book-info/{{title}}" class="book-title">{{title}}</a></h4>
+        <h4 class="book-presentation-author">Author: <a href="#/search/{{this.author}}&1&0" class="book-author">{{this.author}}</a></h4>
+        <h4 class="book-presentation-price">Price: <span class="book-price">{{price}} $</span></h4>
+    </div>
+</div>
+{{/each}}
+<div style="clear: both;"></div>
+{{#each this.indeces}}
+<div class="btn-group btn-page-div">
+    <a href="#/genre-info/{{../this.name}}&{{this}}" class="btn btn-primary btn-page">{{this}}</a>
+</div>
+{{/each}}

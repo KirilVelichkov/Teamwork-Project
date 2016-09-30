@@ -1,0 +1,15 @@
+<div class="book-container">
+    <img src="{{picture._downloadURL}}" class="large" alt="empty">
+    <h4><span class="bold">Title:</span> <span>{{title}}</span></h4>
+    <h4><span class="bold">Author:</span> <span>{{author}}</span></h4>
+    <h4><span class="bold">Genre:</span> <span>{{genre}}</span></h4>
+    <h4><span class="bold">Rating:</span> <span id="rating">{{rating}}</span></h4>
+    <h4><span class="bold">Price:</span> <span class="book-price">${{price}}</span></h4>
+    <button class="btn btn-success" id="btn-like">Like</button>
+    <button class="btn btn-danger" id="btn-dislike">Dislike</button>
+    <button class="btn btn-info" id="btn-add-to-cart">Add to cart</button>    
+    <a id="reddit-submit" class="share-btn" href="//www.reddit.com/r/books/submit?&title={{author}} - {{title}}" target="_blank"> 
+        <img src="//www.redditstatic.com/spreddit10.gif" alt="Submit to reddit" border="0" /> 
+    </a>
+    <img id="facebook-share" class="share-btn" src="http://theonefly.com/wp-content/uploads/2014/12/fbshare.png"/>
+</div>

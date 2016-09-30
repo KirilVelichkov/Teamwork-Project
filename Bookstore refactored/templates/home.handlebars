@@ -1,0 +1,19 @@
+<h1 id="home-header">Search through our library</h1>
+{{#each this.books}}
+<div class="book-container book-presentation-container">
+    <img src="{{this.picture._downloadURL}}" class="small" alt="empty">
+    <div class="book-characteristics">
+        <h4 class="book-presentation-title">Title: <a href="#/book-info/{{this.title}}" class="book-title">{{this.title}}</a></h4>
+        <!--#/search/?:query&:pageNumber&:orderByCode-->
+        <h4 class="book-presentation-author">Author: <a href="#/search/{{this.author}}&1&0" class="book-author">{{this.author}}</a></h4>
+        <h4 class="book-presentation-price">Price: <span class="book-price">${{this.price}}</span></h4>
+        <!--<h4>Rating: <span>{{rating}}</span></h4>-->
+    </div>
+</div>
+{{/each}}
+<div style="clear: both;"></div>
+{{#each this.indeces}}
+<div class="btn-group btn-page-div">
+    <a href="#/home/{{this}}" class="btn btn-primary btn-page">{{this}}</a>
+</div>
+{{/each}}

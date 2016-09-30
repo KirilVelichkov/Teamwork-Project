@@ -1,0 +1,48 @@
+{{#if this.allBooks}}
+<div class="checkout-container flex-content col-xs-10">
+    <div class="order-info col-xs-8">
+        <h2>Your order:</h2>
+        <ul class="no-padding checkout-cart">
+            {{#each this.allBooks}}
+            <li>
+                <div class="flex-content position-relative">
+                    <!--<a class="btn-remove" title="remove">X</a>-->
+                    <img salt="empty" class="extra-small" src="{{this.pictureURL}}">
+                    <div class="book-characteristics">
+                        <h4><span class="bold">Title:</span> <a href="#/book-info" class="book-title">{{this.title}}</a></h4>
+                        <h4><span class="bold">Author:</span> <a href="#/author-info" class="book-author">{{this.author}}</a></h4>
+                        <h4><span class="bold">Price:</span> <span class="book-price">${{this.price}}</span></h4>
+                        <!--<h4>Rating: <span>{{rating}}</span></h4>-->
+                    </div>
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+        <div>
+            <h3><span class="bold">Total:</span> <span class="book-price-green">${{this.totalPrice}}</span></h3>
+        </div>
+    </div>
+    <div class="order-details col-xs-6">
+        <h2>Your details:</h2>
+        <form>
+            <div class="form-group">
+                <label for="firstname">First name</label>
+                <input type="text" class="form-control" id="firstname" placeholder="First name">
+            </div>
+            <div class="form-group">
+                <label for="phonenumber">Phone number</label>
+                <input type="text" class="form-control" id="phonenumberphone" placeholder="Phone number">
+            </div>
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <textarea class="form-control" id="address" rows="3" placeholder="Your address"></textarea>
+            </div>
+        </form>
+        <div>
+            <button type="submit" class="btn btn-success">Send order</button>
+        </div>
+    </div>
+</div>
+{{else}}
+<h1> You shopping cart is empty!</h1>
+{{/if}}

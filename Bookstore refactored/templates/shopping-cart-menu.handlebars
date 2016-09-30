@@ -1,0 +1,29 @@
+<ul class="no-padding overflow-scroll">
+{{#if this.books}} 
+    {{#each this.books}}
+    <li>
+        <div class="flex-content position-relative">
+            <a class="btn-remove" title="remove">X</a>
+            <img salt="empty" class="extra-small" src="{{this.pictureURL}}">
+            <div class="book-characteristics">
+                <h4><span class="bold">Title:</span> <a href="#/book-info" class="book-title">{{this.title}}</a></h4>
+                <h4><span class="bold">Author:</span> <a href="#/author-info" class="book-author">{{this.author}}</a></h4>
+                <h4><span class="bold">Price:</span> <span class="book-price">${{this.price}}</span></h4>
+                <!--<h4>Rating: <span>{{rating}}</span></h4>-->
+            </div>
+        </div>
+    </li>
+    {{/each}}
+ {{else}}
+    <li> <h2>Your shopping cart is empty!</h2></li>
+{{/if}}
+</ul>
+
+<!-- cd-cart-items -->
+<div class="price-container">
+    <div class="cd-cart-total">
+        <h3><span class="bold">Total:</span> <span class="book-price-green">${{this.totalPrice}}</span></h3>
+        <a href="#/checkout" class="btn btn-info">Checkout</a>
+    </div>
+    <!-- cd-cart-total -->
+</div>
