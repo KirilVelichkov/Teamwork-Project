@@ -63,6 +63,15 @@ class UsersController {
                         password: $('#tb-newPassword').val()
                     };
 
+                    if(newUser.username.length < 3 || newUser.username.length > 20){
+                        toastr.error('Username must be between 3 and 20 symbols');
+                        return;
+                    }
+                    if(newUser.password.length < 3 || newUser.password.length > 20){
+                        toastr.error('Password must be between 3 and 20 symbols');
+                        return;
+                    }
+
                     _this.registerUser(newUser, context);
                 });
             });
