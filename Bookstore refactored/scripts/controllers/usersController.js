@@ -99,7 +99,7 @@ class UsersController {
     logoutUser(){
         this.usersData.logout()
             .then(function(){
-                var msg = `${localStorage.getItem(CONSTANTS.USER_NAME)} logged out successfuly!`
+                var msg = `${localStorage.getItem(CONSTANTS.USER_NAME)} logged out successfuly!`;
                 localStorage.removeItem(CONSTANTS.AUTH_TOKEN);
                 localStorage.removeItem(CONSTANTS.USER_NAME);
                 localStorage.removeItem(CONSTANTS.USER_ID);
