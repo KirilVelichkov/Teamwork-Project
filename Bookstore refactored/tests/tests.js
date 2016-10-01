@@ -1,6 +1,10 @@
 import { usersData } from 'usersData';
 import { requester } from 'requester';
 import { usersController} from 'usersController';
+import { UTILS } from 'utils';
+import { KINVEY } from 'kinvey';
+
+var kinvey = KINVEY.URLS;
 
 mocha.setup('bdd');
 
@@ -87,7 +91,7 @@ describe('User Tests', function () {
 
         it('(2) Expect: usersData.register() to make exactly one postJSON call', function (done) {
             usersData.register(user)
-                .then((res) => {              
+                .then((res) => {
                     expect(requester.postJSON.calledOnce).to.be.true;
                 })
                 .then(done, done);
@@ -106,9 +110,34 @@ describe('User Tests', function () {
                 })
                 .then(done, done);
         });
-        
+
     });
 
 });
+
+
+describe('UTILS Tests', function () {
+    const array = [1, 2, 3, 4, 5, 6, 7, 8];
+    const pageNumber = 2;
+    const booksOnPageCount = 4;
+
+    it('(1) createBooksOnPage() should return correct books on page', function () {
+
+        const expected = [5, 6, 7, 8];
+        const actual = UTILS.createBooksOnPage(array, pageNumber, booksOnPageCount);
+
+        expect(actual).to.eql(expected);
+    });
+
+    it('(2) createPageIndeces() should create correct indeces', function () {
+
+        const expected = [1, 2];
+        const actual = UTILS.createPageIndeces(array, booksOnPageCount);
+
+        expect(actual).to.eql(expected);
+    });
+
+});
+
 
 mocha.run();
