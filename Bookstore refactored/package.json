@@ -10,7 +10,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "start chrome tests/tests.html"
+    "test": "start chrome http://127.0.0.1:8080/tests/tests.html && http-server"
   },
   "author": "",
   "license": "ISC"
