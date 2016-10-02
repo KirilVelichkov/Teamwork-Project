@@ -150,6 +150,7 @@ var router = Sammy('#content', function () {
     $('#search-btn').on('click', function () {
         var searchQuery = $('#search-input').val();
         $('#search-input').val("");
+        UTILS.resetOrderByTypeOnChange();
 
         window.location.replace(`#/search/${searchQuery}&1&0`);
     });
