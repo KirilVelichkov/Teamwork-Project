@@ -1,6 +1,7 @@
 import { usersData } from 'usersData';
+import { booksData } from 'booksData';
 import { requester } from 'requester';
-import { usersController} from 'usersController';
+//import { usersController} from 'usersController';
 
 mocha.setup('bdd');
 
@@ -13,10 +14,26 @@ const user = {
     password: 'test2'
 };
 
+const BOOKS_RESULT = {
+    result: []
+};
+const GET_ALL_BOOKS_URL = `https://baas.kinvey.com/appdata/kid_By3bWKRn/books/`;
 
-describe('User Tests', function () {
+const GENRE_NAME = 'genreName';
+const GENRE_FILTER = JSON.stringify({
+    "genre": GENRE_NAME
+});
+const GET_ALL_BOOKS_BY_GENRE_URL = `https://baas.kinvey.com/appdata/kid_By3bWKRn/books/?query=${GENRE_FILTER}`;
 
-    describe('usersData.login() tests', function () {
+const TITLE_NAME = 'titleName';
+const TITLE_FILTER = JSON.stringify({
+    "title": TITLE_NAME
+});
+const GET_ALL_BOOKS_BY_TITLE_URL = `https://baas.kinvey.com/appdata/kid_By3bWKRn/books/?query=${TITLE_FILTER}`;
+
+describe('User Tests', function(){
+
+    describe('usersData.login() tests', function(){
 
         beforeEach(function () {
             sinon.stub(requester, 'postJSON', function (user) {
@@ -63,7 +80,7 @@ describe('User Tests', function () {
 
     });
 
-    describe('usersData.register() tests', function () {
+    describe('usersData.register() tests', function(){
         beforeEach(function () {
             sinon.stub(requester, 'postJSON', function (user) {
                 return new Promise(function (resolve, reject) {
@@ -106,9 +123,127 @@ describe('User Tests', function () {
                 })
                 .then(done, done);
         });
-        
     });
 
 });
 
+describe('Books Tests', function(){
+
+    describe('booksData.getAllBooks() tests', function(){
+        beforeEach(function () {
+            sinon.stub(requester, 'getJSON', function (user) {
+                return new Promise(function (resolve, reject) {
+                    resolve(BOOKS_RESULT);
+                });
+            });
+        });
+
+        afterEach(function () {
+            requester.getJSON.restore();
+        });
+
+        it('(1) Expect: booksData.getAllBooks() to make correct getJSON call', function (done) {
+            booksData.getAllBooks()
+                .then(() => {
+                    expect(requester.getJSON.firstCall.args[0]).to.equal(GET_ALL_BOOKS_URL);
+                })
+                .then(done, done);
+        });
+
+        it('(2) Expect: booksData.getAllBooks() to make exactly one getJSON call', function (done) {
+            booksData.getAllBooks()
+                .then(() => {
+                    expect(requester.getJSON.calledOnce).to.be.true;
+                })
+                .then(done, done);
+        });
+
+        it('(3) expect booksData.getAllBooks() to return correct result', function(done) {
+			booksData.getAllBooks()
+				.then(obj => {
+					expect(obj).to.eql(BOOKS_RESULT)
+				})
+				.then(done, done);
+		});
+    });
+
+    describe('booksData.getBooksByGenre(genreName) tests', function(){
+        beforeEach(function () {
+            sinon.stub(requester, 'getJSON', function (user) {
+                return new Promise(function (resolve, reject) {
+                    resolve(BOOKS_RESULT);
+                });
+            });
+        });
+
+        afterEach(function () {
+            requester.getJSON.restore();
+        });
+
+        it('(1) Expect: booksData.getBooksByGenre(genreName) to make correct getJSON call', function (done) {
+            booksData.getBooksByGenre(GENRE_NAME)
+                .then(() => {
+                    expect(requester.getJSON.firstCall.args[0]).to.equal(GET_ALL_BOOKS_BY_GENRE_URL);
+                })
+                .then(done, done);
+        });
+
+        it('(2) Expect: booksData.getBooksByGenre(genreName) to make exactly one getJSON call', function (done) {
+            booksData.getBooksByGenre(GENRE_NAME)
+                .then(() => {
+                    expect(requester.getJSON.calledOnce).to.be.true;
+                })
+                .then(done, done);
+        });
+
+        it('(3) expect booksData.getBooksByGenre(genreName) to return correct result', function(done) {
+			booksData.getBooksByGenre(GENRE_NAME)
+				.then(obj => {
+					expect(obj).to.eql(BOOKS_RESULT);
+				})
+				.then(done, done);
+		});
+    });
+
+    describe('booksData.getBooksByTitle(titleName) tests', function(){
+        beforeEach(function () {
+            sinon.stub(requester, 'getJSON', function (user) {
+                return new Promise(function (resolve, reject) {
+                    resolve(BOOKS_RESULT);
+                });
+            });
+        });
+
+        afterEach(function () {
+            requester.getJSON.restore();
+        });
+
+        it('(1) Expect: booksData.getBookByTitle(titleName) to make correct getJSON call', function (done) {
+            booksData.getBookByTitle(TITLE_NAME)
+                .then(() => {
+                    expect(requester.getJSON.firstCall.args[0]).to.equal(GET_ALL_BOOKS_BY_TITLE_URL);
+                })
+                .then(done, done);
+        });
+
+        it('(2) Expect: booksData.getBookByTitle(titleName) to make exactly one getJSON call', function (done) {
+            booksData.getBookByTitle(TITLE_NAME)
+                .then(() => {
+                    expect(requester.getJSON.calledOnce).to.be.true;
+                })
+                .then(done, done);
+        });
+
+        it('(3) expect booksData.getBookByTitle(titleName) to return correct result', function(done) {
+			booksData.getBookByTitle(TITLE_NAME)
+				.then(obj => {
+					expect(obj).to.eql(BOOKS_RESULT);
+				})
+				.then(done, done);
+		});
+    });
+});
+
 mocha.run();
+
+
