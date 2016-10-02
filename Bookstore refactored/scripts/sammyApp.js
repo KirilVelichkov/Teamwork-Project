@@ -153,6 +153,12 @@ var router = Sammy('#content', function () {
 
         window.location.replace(`#/search/${searchQuery}&1&0`);
     });
+    
+    $('#search-input').keyup(function(e){
+        if(e.keyCode === 13){
+            $('#search-btn').trigger('click');
+        }
+    });
 });
 
 router.run('#/');
