@@ -1,7 +1,15 @@
 import { usersData } from 'usersData';
 import { booksData } from 'booksData';
 import { requester } from 'requester';
+<<<<<<< HEAD
 //import { usersController} from 'usersController';
+=======
+import { usersController} from 'usersController';
+import { UTILS } from 'utils';
+import { KINVEY } from 'kinvey';
+
+var kinvey = KINVEY.URLS;
+>>>>>>> 5026ca9824aed24c1ec3676f0a4b10764f574b78
 
 mocha.setup('bdd');
 
@@ -104,7 +112,7 @@ describe('User Tests', function(){
 
         it('(2) Expect: usersData.register() to make exactly one postJSON call', function (done) {
             usersData.register(user)
-                .then((res) => {              
+                .then((res) => {
                     expect(requester.postJSON.calledOnce).to.be.true;
                 })
                 .then(done, done);
@@ -123,10 +131,15 @@ describe('User Tests', function(){
                 })
                 .then(done, done);
         });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5026ca9824aed24c1ec3676f0a4b10764f574b78
     });
 
 });
 
+<<<<<<< HEAD
 describe('Books Tests', function(){
 
     describe('booksData.getAllBooks() tests', function(){
@@ -247,3 +260,31 @@ describe('Books Tests', function(){
 mocha.run();
 
 
+=======
+
+describe('UTILS Tests', function () {
+    const array = [1, 2, 3, 4, 5, 6, 7, 8];
+    const pageNumber = 2;
+    const booksOnPageCount = 4;
+
+    it('(1) createBooksOnPage() should return correct books on page', function () {
+
+        const expected = [5, 6, 7, 8];
+        const actual = UTILS.createBooksOnPage(array, pageNumber, booksOnPageCount);
+
+        expect(actual).to.eql(expected);
+    });
+
+    it('(2) createPageIndeces() should create correct indeces', function () {
+
+        const expected = [1, 2];
+        const actual = UTILS.createPageIndeces(array, booksOnPageCount);
+
+        expect(actual).to.eql(expected);
+    });
+
+});
+
+
+mocha.run();
+>>>>>>> 5026ca9824aed24c1ec3676f0a4b10764f574b78
