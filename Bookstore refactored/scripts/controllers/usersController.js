@@ -3,6 +3,7 @@ import toastr from 'toastr';
 import { CONSTANTS } from 'constants';
 import { usersData } from 'usersData';
 import { templates } from 'templates';
+import { UTILS } from 'utils';
 
 
 class UsersController {
@@ -17,7 +18,7 @@ class UsersController {
         this.templates.getTemplate('login')
             .then(function(responseTemplate){
                 $content.html(responseTemplate());
-                $('#filters').addClass('hidden');
+                UTILS.hideFilters();
 
                 $('#btn-login').on('click', function () {
                     var logUser = {
@@ -56,7 +57,8 @@ class UsersController {
         this.templates.getTemplate('register')
             .then(function(responseTemplate){
                 $content.html(responseTemplate());
-                $('#filters').addClass('hidden');
+                UTILS.hideFilters();
+
                 $('#btn-register').on('click', function () {
                     var newUser = {
                         username: $('#tb-newUsername').val(),

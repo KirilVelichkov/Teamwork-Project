@@ -96,6 +96,14 @@ function isUserLoggedIn(){
     }
 }
 
+function showFilters(){
+    $('#filters').removeClass('hidden');
+}
+
+function hideFilters(){
+    $('#filters').addClass('hidden');
+}
+
 var utils = {
     encryptToBase64,
     encryptToSha1,
@@ -106,7 +114,9 @@ var utils = {
     resetOrderByTypeOnChange,
     getShortUrl,
     fixPaginationForOrderBy,
-    isUserLoggedIn
+    isUserLoggedIn,
+    showFilters,
+    hideFilters
 };
 
 export { utils as UTILS };

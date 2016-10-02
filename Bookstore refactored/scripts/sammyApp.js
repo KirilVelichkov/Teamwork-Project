@@ -137,6 +137,10 @@ var router = Sammy('#content', function () {
         $orderByChoice.html($(this).html() + '<span class="caret"></span>');
     });
 
+    $('#navbar-brand-id').on('click', function(){
+        UTILS.resetOrderByTypeOnChange();
+    });
+
    $('aside > ul.nav.nav-pills.nav-stacked > li > a').each((i, item) => {
         if (i !== 0) {
             item.addEventListener('click', UTILS.resetOrderByTypeOnChange);

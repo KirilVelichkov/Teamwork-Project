@@ -36,7 +36,7 @@ class BooksConroller {
             })
             .then(function (template) {
                 $content.html(template(totalBooks));
-                $('#filters').removeClass('hidden');
+                UTILS.showFilters()
                 UTILS.fixPaginationForOrderBy(orderByCode);
             });
     }
@@ -66,7 +66,7 @@ class BooksConroller {
             })
             .then(function (template) {
                 $content.html(template(category));
-                $('#filters').removeClass('hidden');
+                UTILS.showFilters()
                 UTILS.fixPaginationForOrderBy(orderByCode);
             });
     }
@@ -111,7 +111,7 @@ class BooksConroller {
             })
             .then(function (template) {
                 $content.html(template(seachResult));
-                $('#filters').removeClass('hidden');
+                UTILS.showFilters()
                 UTILS.fixPaginationForOrderBy(orderByCode);
             });
     }
@@ -128,7 +128,7 @@ class BooksConroller {
             })
             .then(function (template) {
                 $content.html(template(book));
-                $('#filters').addClass('hidden');
+                UTILS.hideFilters()
 
                 if (UTILS.isUserLoggedIn()) {
                     $('#btn-like').removeClass('hidden');
@@ -223,7 +223,7 @@ class BooksConroller {
             })
             .then(function(template) {
                 $content.html(template(books));
-                
+                UTILS.hideFilters();
             });
     }
 }
