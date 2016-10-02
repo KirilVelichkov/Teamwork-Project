@@ -2,6 +2,7 @@ import { usersData } from 'usersData';
 import { booksData } from 'booksData';
 import { requester } from 'requester';
 import { KINVEY } from 'kinvey';
+import { UTILS } from 'utils';
 
 mocha.setup('bdd');
 
