@@ -29,8 +29,6 @@ var login = function (logUser) {
                 resolve(response);
             },
             fail: function (err) {
-                console.log(11);
-
                 reject(err);
             },
             statusCode: {
@@ -41,7 +39,7 @@ var login = function (logUser) {
                     toastr.error('Invalid username or password');
                 }
             }
-            });
+        });
     });
 
     return promise;

@@ -1,7 +1,7 @@
-import CryptoJS from 'cryptojs';
-import { templates } from 'templates';
 import $ from 'jquery';
+import CryptoJS from 'cryptojs';
 import { CONSTANTS } from 'constants';
+import { templates } from 'templates';
 
 function encryptToBase64(string) {
     var toUtf8 = CryptoJS.enc.Utf8.parse(string);
@@ -32,7 +32,6 @@ function createPageIndeces(array, booksOnPageCount) {
     return array;
 }
 
-
 function addBooksToCart(books) {
     let templateToParse,
         totalPrice = 0;
@@ -46,7 +45,7 @@ function addBooksToCart(books) {
         totalPrice
     };
 
-    templates.get('shopping-cart-menu').then((template) => {
+    templates.getTemplate('shopping-cart-menu').then((template) => {
         $('#shopping-cart-menu').html(template(templateToParse));
     });
 }
@@ -87,6 +86,24 @@ function getShortUrl(longUrl, func) {
     );
 }
 
+function isUserLoggedIn(){
+    var username = localStorage.getItem(CONSTANTS.USER_NAME);
+
+    if (!username) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function showFilters(){
+    $('#filters').removeClass('hidden');
+}
+
+function hideFilters(){
+    $('#filters').addClass('hidden');
+}
+
 var utils = {
     encryptToBase64,
     encryptToSha1,
@@ -96,6 +113,10 @@ var utils = {
     setupOrderByLinks,
     resetOrderByTypeOnChange,
     getShortUrl,
-    fixPaginationForOrderBy
+    fixPaginationForOrderBy,
+    isUserLoggedIn,
+    showFilters,
+    hideFilters
 };
+
 export { utils as UTILS };

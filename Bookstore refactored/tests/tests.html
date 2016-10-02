@@ -5,29 +5,26 @@
     <meta charset="UTF-8">
     <!--Meta tags for facebook-->
     <meta property="og:description" content="The best bookstore around" />
-    <meta property="og:image" content="https://s-media-cache-ak0.pinimg.com/originals/70/bd/63/70bd630505578fffc4c873001f89a9e1.jpg" />
+    <meta property="og:image" content="https://s-media-cache-ak0.pinimg.com/originals/70/bd/63/70bd630505578fffc4c873001f89a9e1.jpg"
+    />
     <meta property="og:image:width" content="400" />
     <meta property="og:image:height" content="400" />
     <!--End meta tags for facebook-->
     <title>Bookstore</title>
     <link rel="shortcut icon" href="fav-icon/faviconBook.png" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./bower_components/toastr/toastr.css">
-    <link rel="stylesheet" href="styles/silver-theme.css">
-    <link rel="stylesheet" href="styles/custom-theme.css">
-    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../bower_components/mocha/mocha.css">
+
 </head>
 
 <body>
-    <header class="position-fixed">
+
+    <!--<header class="position-fixed">
         <nav class="navbar navbar-default">
-            <a href="#/home/1" class="navbar-brand" id="navbar-brand-id">BOOKSTORE.COM</a>
+            <a href="#/home/1&0" class="navbar-brand" id="navbar-brand-id">BOOKSTORE.COM</a>
 
             <form class="navbar-form navbar-right" role="search" id="search-control">
                  <input type="text" class="form-control" placeholder="Search by title or author" id="search-input">
                 <a class="btn btn-info" id="search-btn">Search</a>
-                <!--<a href="#/detailed-search" class="btn btn-info hidden" id="detailed-btn">Detailed Search</a>-->
                 <a id="shopping-cart-button" class="btn btn-circle hidden">
                     <span class="glyphicon glyphicon-shopping-cart cart"></span>
                 </a>
@@ -36,7 +33,7 @@
             <div class="navbar-right" id="login-control">
                 <a id="nav-btn-login" class="btn btn-info hidden" href="#/login">Login</a>
                 <a id="nav-btn-register" class="btn btn-info hidden" href="#/register">Register</a>
-                <a id="nav-btn-logout" class="btn btn-info hidden" href="#/home/1">Logout</a>
+                <a id="nav-btn-logout" class="btn btn-info hidden" href="#/home/1&0">Logout</a>
             </div>
         </nav>
     </header>
@@ -50,7 +47,7 @@
                     <li><a href="#/genre-info/Economy&1" class="genre-info">Economy</a></li>
                     <li><a href="#/genre-info/Fantasy&1" class="genre-info">Fantasy</a></li>
                     <li><a href="#/genre-info/Classics&1" class="genre-info">Classics</a></li>
-                    <li><a href="#/home/1">All</a></li>
+                    <li><a href="#/home/1&0" class="genre-info">All</a></li>
                 </ul>
                 <div id="filters">
                     <label>Order by:</label>
@@ -78,9 +75,13 @@
 
             </div>
         </div>
-    </div>
+    </div>-->
+    <div id="mocha"></div>
 
-    <script src="./node_modules/systemjs/dist/system.js"></script>
+    <script src="../node_modules/systemjs/dist/system.js"></script>
+    <script src="../bower_components/mocha/mocha.js"></script>
+    <script src="../bower_components/chai/chai.js"></script>
+    <script src="./sinon-1.17.6.js"></script>
     <script src="./config.js"></script>
 
 </body>
